@@ -12,29 +12,23 @@ const LandingBar = () => {
         flexDirection={"row"}
         justify={"space-between"}
         align={"center"}
-        p={"0.5rem"}
-        pt={"1rem"}
+        p={"1rem"}
       >
         <Image
           src="/images/logoLargeLight.png"
           alt="RevUpLogo.png"
-          h={"45px"}
+          h={"30px"}
           display={{ base: "none", md: "block" }}
         />
 
         <Image
           src="/images/logoSmallLight.png"
           alt="RevUpLogo.png"
-          h={"45px"}
+          h={"30px"}
           display={{ base: "block", md: "none" }}
         />
 
-        <Flex
-          className={"landingBarText"}
-          flexDirection={"row"}
-          gap={3}
-          pr={"0.5rem"}
-        >
+        <Flex className={"landingBarText"} flexDirection={"row"} gap={3}>
           <Link to={"/auth?mode=signup"} as={RouterLink}>
             <Text>Sign Up</Text>
           </Link>

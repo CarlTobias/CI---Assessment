@@ -1,85 +1,90 @@
 @font-face {
-    font-family: 'OpenSans';
-    src: url('/fonts/OpenSans-VariableFont.ttf');
+  font-family: "OpenSans";
+  src: url("/fonts/OpenSans-VariableFont.ttf");
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/fonts/Montserrat-VariableFont.ttf');
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-VariableFont.ttf");
 }
 
 /* Global */
 body {
-    /* overflow-x: hidden; */
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* overflow-x: hidden; */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-
 
 /* AuthForm Section */
 .formHeader {
-    font-family: 'OpenSans';
-    font-weight: 900;
-    color: #90030C;
+  font-family: "OpenSans";
+  font-weight: 900;
+  color: #90030c;
 }
 
 .inputText {
-    font-family: 'Montserrat';
-    font-weight: 500;
+  font-family: "Montserrat";
+  font-weight: 500;
 }
 
 Input {
-    font-family: 'OpenSans';
+  font-family: "OpenSans";
 }
 
 Button {
-    font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .signUpText1 {
-    font-family: 'Montserrat';
-    font-weight: 350;
-    color: #3F3F3F;
+  font-family: "Montserrat";
+  font-weight: 350;
+  color: #3f3f3f;
 }
 
 .signUpText2 {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    color: #3F3F3F;
+  font-family: "Montserrat";
+  font-weight: 600;
+  color: #3f3f3f;
 }
-
 
 /* LandingPage */
 .landingBarText {
-    font: 'Montserrat';
-    font-weight: 600;
-    color: #FFF;
+  font: "Montserrat";
+  font-weight: 600;
+  color: #fff;
 }
 
 .landingHeroHeader {
-    font: 'Montserrat';
-    font-weight: 350;
-    color: #FFF;
+  font: "Montserrat";
+  font-weight: 350;
+  color: #fff;
 }
 
 .landingHeroSubtitle {
-    font: 'Montserrat';
-    font-weight: 600;
-    color: #FFF;
+  font: "Montserrat";
+  font-weight: 600;
+  color: #fff;
 }
 
 .aboutHeader {
-    font: 'Montserrat';
-    font-weight: 700;
-    color: #000;
+  font: "Montserrat";
+  font-weight: 700;
+  color: #000;
 }
 
 .aboutSubtitle {
-    font: 'Montserrat';
-    font-weight: 600;
-    color: #000;
+  font: "Montserrat";
+  font-weight: 600;
+  color: #000;
+}
+
+/* HomeBar and HomePage */
+.homeLink {
+  font: "Montserrat";
+  font-weight: 600;
+  color: #000;
 }

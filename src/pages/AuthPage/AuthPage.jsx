@@ -23,14 +23,7 @@ const AuthPage = () => {
         backgroundSize={"cover"}
         backgroundPosition={"center"}
       >
-        <Flex
-          w={"100vw"}
-          justify={"left"}
-          align={"center"}
-          p={"0.5rem"}
-          pt={"1rem"}
-          pb={"0"}
-        >
+        <Flex w={"100vw"} justify={"left"} align={"center"} p={"1rem"} pb={"0"}>
           <Link to={"/landing"} as={RouterLink}>
             <Image
               src="/images/logoLargeDark.png"
