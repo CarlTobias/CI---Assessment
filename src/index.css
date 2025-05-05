@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url('/fonts/OpenSans-VariableFont.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat-VariableFont.ttf');
+}
+
+/* Global */
+body {
+    /* overflow-x: hidden; */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* AuthForm Section */
+.formHeader {
+    font-family: 'OpenSans';
+    font-weight: 900;
+    color: #90030C;
+}
+
+.inputText {
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+Input {
+    font-family: 'OpenSans';
+}
+
+Button {
+    font-family: 'Montserrat';
+}
+
+.signUpText1 {
+    font-family: 'Montserrat';
+    font-weight: 350;
+    color: #3F3F3F;
+}
+
+.signUpText2 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    color: #3F3F3F;
+}
+
+
+/* LandingPage */
+.landingBarText {
+    font: 'Montserrat';
+    font-weight: 600;
+    color: #FFF;
+}
+
+.landingHeroHeader {
+    font: 'Montserrat';
+    font-weight: 350;
+    color: #FFF;
+}
+
+.landingHeroSubtitle {
+    font: 'Montserrat';
+    font-weight: 600;
+    color: #FFF;
+}
+
+.aboutHeader {
+    font: 'Montserrat';
+    font-weight: 700;
+    color: #000;
+}
+
+.aboutSubtitle {
+    font: 'Montserrat';
+    font-weight: 600;
+    color: #000;
+}

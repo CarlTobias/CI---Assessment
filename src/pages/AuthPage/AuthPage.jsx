@@ -1,7 +1,16 @@
 import React from "react";
-import './AuthPage.css'
+import "../../index.css";
 
-import { Box, Container, Flex, Image, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  Link,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
 const AuthPage = () => {
@@ -10,7 +19,7 @@ const AuthPage = () => {
       <Flex
         direction={"column"}
         minH={"100vh"}
-        backgroundImage={"url('/images/landingBackground.png')"}
+        backgroundImage={"url('/images/authBackground.png')"}
         backgroundSize={"cover"}
         backgroundPosition={"center"}
       >
@@ -22,19 +31,21 @@ const AuthPage = () => {
           pt={"1rem"}
           pb={"0"}
         >
-          <Image
-            src="/images/logoLargeDark.png"
-            alt="RevUpLogo.png"
-            h={"45px"}
-            display={{ base: "none", md: "block" }}
-          />
+          <Link to={"/landing"} as={RouterLink}>
+            <Image
+              src="/images/logoLargeDark.png"
+              alt="RevUpLogo.png"
+              h={"45px"}
+              display={{ base: "none", md: "block" }}
+            />
 
-          <Image
-            src="/images/logoSmallDark.png"
-            alt="RevUpLogo.png"
-            h={"45px"}
-            display={{ base: "block", md: "none" }}
-          />
+            <Image
+              src="/images/logoSmallDark.png"
+              alt="RevUpLogo.png"
+              h={"45px"}
+              display={{ base: "block", md: "none" }}
+            />
+          </Link>
         </Flex>
 
         <Flex flex={1} justify={"center"} align={"center"}>
@@ -54,8 +65,10 @@ const AuthPage = () => {
               gap={3}
             >
               <VStack>
-                <Box fontSize={{base: "25px", md: "45px"}}>
-                  <h1 className="formHeader">Let's Rev-Up!</h1>
+                <Box fontSize={{ base: "25px", md: "45px" }}>
+                  <Text className="formHeader" p={"1rem"}>
+                    Let's Rev-Up!
+                  </Text>
                 </Box>
 
                 <AuthForm />

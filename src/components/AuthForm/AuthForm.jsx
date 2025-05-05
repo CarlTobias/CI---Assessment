@@ -1,27 +1,108 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, Button, Container, Flex, Input, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Input, Text, VStack } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const queryParams = new URLSearchParams(location.search);
+  const mode = queryParams.get("mode");
+
+  const [isLogin, setIsLogin] = useState(mode !== "signup");
+
+  useEffect(() => {
+    setIsLogin(mode !== "signup");
+  }, [mode]);
+
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleAuth = () => {
+    if (!inputs.email || !inputs.password) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    navigate("/home");
+  };
+
   return (
     <>
       <Box padding={3} w={{ base: "max-content", md: "35vw" }}>
         <VStack gap={5}>
+          {!isLogin ? (
+            <Container>
+              <Text className={"inputText"}>Username</Text>
+              <Input
+                borderColor={"#292929"}
+                borderRadius={5}
+                placeholder="Enter Username"
+                _placeholder={{ color: "#3F3F3F" }}
+                fontSize={14}
+                _hover={{ borderColor: "#90030C" }}
+                type="text"
+                value={inputs.username}
+                onChange={(e) =>
+                  setInputs({ ...inputs, username: e.target.value })
+                }
+              />
+            </Container>
+          ) : null}
+
           <Container>
-            <h1 className={"inputText"}>Email Address</h1>
-            <Input />
+            <Text className={"inputText"}>Email Address</Text>
+            <Input
+              borderColor={"#292929"}
+              borderRadius={5}
+              placeholder="Enter Email"
+              _placeholder={{ color: "#3F3F3F" }}
+              fontSize={14}
+              _hover={{ borderColor: "#90030C" }}
+              type="email"
+              value={inputs.email}
+              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+            />
           </Container>
 
           <Container>
-            <h1 className={"inputText"}>Password</h1>
-            <Input />
+            <Text className={"inputText"}>Password</Text>
+            <Input
+              borderColor={"#292929"}
+              borderRadius={5}
+              placeholder="Enter Password"
+              _placeholder={{ color: "#3F3F3F" }}
+              fontSize={14}
+              _hover={{ borderColor: "#90030C" }}
+              type="password"
+              value={inputs.password}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
+            />
           </Container>
 
           {!isLogin ? (
             <Container>
-              <h1 className={"inputText"}>Confirm Password</h1>
-              <Input />
+              <Text className={"inputText"}>Confirm Password</Text>
+              <Input
+                borderColor={"#292929"}
+                borderRadius={5}
+                placeholder="Confirm Password"
+                _placeholder={{ color: "#3F3F3F" }}
+                fontSize={14}
+                _hover={{ borderColor: "#90030C" }}
+                type="password"
+                value={inputs.confirmPassword}
+                onChange={(e) =>
+                  setInputs({ ...inputs, confirmPassword: e.target.value })
+                }
+              />
             </Container>
           ) : null}
 
@@ -31,6 +112,7 @@ const AuthForm = () => {
               bg={"#292929"}
               color={"#FFFFFF"}
               _hover={{ bg: "#90030C" }}
+              onClick={handleAuth}
             >
               {isLogin ? "Log In" : "Sign Up"}
             </Button>
@@ -47,8 +129,10 @@ const AuthForm = () => {
               <Box
                 className={"signUpText2"}
                 fontSize={14}
-                onClick={() => setIsLogin(!isLogin)}
-                color={"#E49F43"}
+                onClick={() =>
+                  navigate(`/auth?mode=${isLogin ? "signup" : "login"}`)
+                }
+                color={"#90030C"}
                 cursor={"pointer"}
                 _hover={{ textDecoration: "underline" }}
               >
