@@ -89,4 +89,8 @@ Button {
   color: #000;
 }
 
+.joinRevUp {
+  letter-spacing: 4px;
+  text-shadow: 3px 5px 12px rgba(0, 0, 0, 0.4);
+}
 
