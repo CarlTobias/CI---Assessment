@@ -294,6 +294,63 @@ const LandingPage = () => {
       </Box>
 
       <Text fontSize="9xl"fontWeight="Bold">JOIN REV UP NOW</Text>
+
+      <Box
+  display="flex"
+  justifyContent="center"
+  alignItems="center"
+  w="100%"
+  h={{ base: "200px", md: "400px" }}
+  my="4rem"
+>
+  <Image
+    src="public\images\Showcase.png" 
+    alt="Centered Display"
+    objectFit="contain"
+    maxH="100%"
+    maxW="90%"
+    borderRadius="xl"
+    boxShadow="xl"
+  />
+</Box>
+
+
+{/* Full Width Image with Box Blur Overlay Section */}
+<Box position="relative" w="100vw" h="100vh" mt="10rem">
+  <Image
+    src="/images/CarHome.png"
+    alt="Full Background"
+    w="100%"
+    h="100%"
+    objectFit="cover"
+  />
+
+  {/* Only this Box has the blur, not the full image */}
+  <Box
+    position="absolute"
+    top="50%"
+    left="50%"
+    transform="translate(-50%, -50%)"
+    backgroundColor="rgba(20, 20, 20, 0.62)"
+    backdropFilter="blur(8px)"
+    px="3rem"
+    py="2rem"
+    borderRadius="lg"
+    boxShadow="xl"
+    display="flex"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Text
+      color="white"
+      fontSize={{ base: "3xl", md: "5xl" }}
+      fontWeight="bold"
+      textAlign="center"
+    >
+      Redirect to Forum
+    </Text>
+  </Box>
+</Box>
     </>
   );
 };
