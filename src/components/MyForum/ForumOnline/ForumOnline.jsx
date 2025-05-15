@@ -1,28 +1,27 @@
-import React from "react";
-
 import { Avatar, Box, Flex, Input } from "@chakra-ui/react";
+import ForumPosts from "./ForumPosts/ForumPosts";
 
 const ForumOnline = () => {
   return (
     <>
-      <Flex
-        flexDirection={"column"}
-        border={"2px solid red"}
-        w={"40vw"}
-        h={"100vh"}
-        justify={"top"}
-      >
+      <Flex flexDirection={"column"} w={"40vw"} h={"100vh"} gap={3} justify={"start"}>
         <Box className={"titleTextForum"} w={"100%"} fontSize={32}>
           Online Forum
         </Box>
 
-        <Flex w={"100%"}>
-          <Box w={"100%"} p={5}>
+        <Flex w={"100%"} borderRadius={5} boxShadow={"2xl"}>
+          <Flex justify={"center"} align={"center"} gap={2} w={"100%"} p={5}>
             <Avatar size={"lg"} />
-            <Input  />
-          </Box>
+            <Input
+              border={"0px"}
+              placeholder={"What's on your mind?"}
+            />
+          </Flex>
         </Flex>
+
+        <ForumPosts />
       </Flex>
+      {/* Fix */}
     </>
   );
 };
