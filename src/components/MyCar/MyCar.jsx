@@ -6,5 +6,3 @@ const MyCar = () => {
     <div>MyCar</div>
   )
 }
-
-export default MyCar
