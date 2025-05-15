@@ -12,7 +12,8 @@ const LandingBar = () => {
         flexDirection={"row"}
         justify={"space-between"}
         align={"center"}
-        p={"1rem"}
+        p={"3rem"}
+       
       >
         <Image
           src="/images/logoLargeLight.png"

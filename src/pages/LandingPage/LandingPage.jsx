@@ -33,22 +33,19 @@ const LandingPage = () => {
                 className={"landingHeroHeader"}
                 fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
                 textAlign={{ base: "center", md: "left" }}
+                px={{ base: "1rem", md: "5rem" }}   // horizontal padding
+                py={{ base: "1rem", md: "2rem" }}   // vertical padding
               >
-                Stay on Track
+                Stay on Track <br/>  Stay on the Road
               </Text>
 
-              <Text
-                className={"landingHeroHeader"}
-                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
-                textAlign={{ base: "center", md: "left" }}
-              >
-                Stay on the Road
-              </Text>
+         
 
               <Text
                 className={"landingHeroSubtitle"}
                 fontSize={{ base: "md", md: "lg", lg: "xl" }}
                 textAlign={{ base: "center", md: "left" }}
+                px={{ base: "1rem", md: "5rem" }}   // horizontal padding
               >
                 Rev up your ride with our all-in-one platform—where car care
                 meets community!
@@ -65,8 +62,9 @@ const LandingPage = () => {
             w={"100vw"}
             p={0}
             m={0}
+          
           >
-            <Text className={"aboutHeader"} fontSize={50}>
+            <Text className={"aboutHeader"} fontSize={50} pt={"4rem"}>
               About Us
             </Text>
             <Text
@@ -74,6 +72,7 @@ const LandingPage = () => {
               align={"right"}
               w={"45vw"}
               fontSize={25}
+              pt={"4rem"}
             >
               Our platform is a comprehensive tool designed to help car owners
               and enthusiasts effortlessly manage vehicle maintenance while
@@ -89,6 +88,8 @@ const LandingPage = () => {
               mt={-300}
               mr={-150}
               zIndex={1}
+              borderRadius={18}
+              p={"2rem"}
             >
               <Text className={"aboutMiniHeader"}>Easy to Apply</Text>
               <Text className={"aboutMiniBody"}>
@@ -97,15 +98,17 @@ const LandingPage = () => {
               </Text>
             </Box>
 
-            <Image src="/images/car.png" alt="car.png" h={"50%"} />
+            <Image src="/images/car.png" alt="car.png" h={"80%"} />
 
             <Box
               backgroundColor={"#D9D9D9"}
-              h={"250px"}
-              w={"250px"}
+              h={"300px"}
+              w={"300px"}
               mb={-200}
               ml={-150}
               zIndex={1}
+              borderRadius={18}
+              p={"2rem"}
             >
               <Text className={"aboutMiniHeader"}>Easy to Apply</Text>
               <Text className={"aboutMiniBody"}>
@@ -116,6 +119,51 @@ const LandingPage = () => {
           </Box>
         </Flex>
       </Flex>
+
+      <Text
+       className={"aboutSubtitle"}
+       align={"left"}
+       w={"45vw"}
+       fontSize={25}
+       pt={"4rem"}
+       ml={"10rem"}
+       mb={"10rem"}>
+  Our platform is a comprehensive tool designed to help car owners
+  and enthusiasts effortlessly manage vehicle maintenance while
+  building a community around.
+</Text>
+
+<Box w="100vw" h="auto" position="relative" mt={"2rem"}>
+  {/* Video */}
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    style={{ width: "100%", height: "auto", objectFit: "cover" }}
+  >
+    <source src="public\images\REV.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  {/* Overlay Text */}
+  <Text
+    className="aboutHeader"
+    fontSize={100}
+    color="white"
+    position="absolute"
+    top="20%"
+    left="50%"
+    transform="translate(-50%, -50%)"
+    textAlign="center"
+    zIndex={2}
+    px={"1rem"}
+    whiteSpace="nowrap"
+  >
+    How Rev-Up Works
+  </Text>
+</Box>
+
     </>
   );
 };
