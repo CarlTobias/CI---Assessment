@@ -1,13 +1,8 @@
 import React from 'react'
-
-import { Flex } from '@chakra-ui/react'
+import { Flex } from "@chakra-ui/react";
 
 const MyCar = () => {
   return (
-    <>
-    <Flex>Hi</Flex>
-    </>
+    <div>MyCar</div>
   )
 }
-
-export default MyCar
