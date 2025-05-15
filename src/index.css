@@ -94,3 +94,9 @@ Button {
   text-shadow: 3px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
+/* Forum Page */
+.titleTextForum {
+  font: "Montserrat";
+  font-weight: 600;
+  color: #000;
+}

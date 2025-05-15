@@ -147,7 +147,7 @@ const LandingPage = () => {
           playsInline
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
         >
-          <source src="/images/REV.mp4" type="video/mp4" />
+          <source src="/videos/REV.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -222,7 +222,7 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            <Image src="/public/images/People.png" alt="Feature 2 Icon" boxSize="80px" mb={4} />
+            <Image src="/images/People.png" alt="Feature 2 Icon" boxSize="80px" mb={4} />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Connect
             </Text>
