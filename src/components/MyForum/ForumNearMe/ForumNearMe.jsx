@@ -8,7 +8,7 @@ const ForumNearMe = () => {
         <Box
           w={"100%"}
           fontWeight={600}
-          fontSize={{ md: "xl", lg: 28, xl: "4xl" }}
+          fontSize={{ md: "2xl", lg: 28, xl: "4xl" }}
           color={"#000"}
         >
           Garages Near Me
