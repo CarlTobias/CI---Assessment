@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./index.css";
 import App from "./App.jsx";
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
