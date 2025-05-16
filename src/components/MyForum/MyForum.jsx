@@ -2,7 +2,6 @@ import { Box, Container, Flex } from "@chakra-ui/react";
 
 import ForumNearMe from "./ForumNearMe/ForumNearMe";
 import ForumOnline from "./ForumOnline/ForumOnline";
-import ForumMessages from "./ForumMessages/ForumMessages";
 
 const MyForum = () => {
   return (
@@ -17,14 +16,10 @@ const MyForum = () => {
             <ForumNearMe />
           </Box>
 
-          <Box justify={"center"} w={"100%"} flex={2}>
+          {/* Make only ForumOnline Scrollable */}
+          <Box justify={"center"} w={"100%"} flex={3}>
             <ForumOnline />
           </Box>
-
-          <Box display={{ base: "none", md: "block" }} flex={1}>
-            <ForumMessages />
-          </Box>
-          {/* <Flex w={"25vw"} /> */}
         </Flex>
       </Container>
     </>

@@ -1,7 +1,7 @@
-import { Box, Text, Button, HStack, VStack, Divider, Icon, Link, Flex } from "@chakra-ui/react";
+import { Box, Text, Button, HStack, Divider, Icon, Link, Flex } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
-const Footer = () => {
+const LandingFooter = () => {
   return (
     <Box bg="#141414" color="white" px={{ base: "1.5rem", md: "4rem" }} py="3rem">
       {/* Top Section */}
@@ -67,4 +67,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default LandingFooter;

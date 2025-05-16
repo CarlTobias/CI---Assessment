@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import LandingBar from "../../components/LandingBar/LandingBar";
-import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/LandingFooter/LandingFooter";
 import { MdBuild } from "react-icons/md";
 
 
@@ -64,6 +64,7 @@ const LandingPage = () => {
             </Flex>
           </Container>
         </Flex>
+
 
         <Flex w={"100vw"} h={"100vh"} align={"center"} flexDirection={"column"}>
           <Box
@@ -278,7 +279,7 @@ const LandingPage = () => {
             textAlign="center"
           >
             <Image
-              src="public\images\Loc.png"
+              src="/images/Loc.png"
               alt="Feature 3 Icon"
               boxSize="80px"
               mb={4}
@@ -324,7 +325,7 @@ const LandingPage = () => {
             textAlign="center"
           >
             
-            <Image src="public\images\Paper.png" alt="Feature 4 Icon" boxSize="80px" mb={4} />
+            <Image src="/images/Paper.png" alt="Feature 4 Icon" boxSize="80px" mb={4} />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Record
             </Text>
@@ -346,7 +347,7 @@ const LandingPage = () => {
        my="4rem">
 
       <Image
-      src="public\images\Showcase.png" 
+      src="/images\Showcase.png" 
       alt="Centered Display"
       objectFit="contain"
       maxH="100%"

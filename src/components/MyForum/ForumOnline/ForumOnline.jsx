@@ -8,7 +8,7 @@ const ForumOnline = () => {
         <Box
           w={"100%"}
           fontWeight={600}
-          fontSize={{ base: "lg", md: "xl", lg: 28, xl: "4xl" }}
+          fontSize={{ base: "4xl", md: "2xl", lg: 28, xl: "4xl" }}
           color={"#000"}
         >
           Online Forum
