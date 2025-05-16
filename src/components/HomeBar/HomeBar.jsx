@@ -1,12 +1,15 @@
 import React from "react";
 
 import { Flex, Image, Link, Text } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 import { IoMdSettings } from "react-icons/io";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 
 const HomeBar = () => {
+  const location = useLocation();
+  const currentMode = new URLSearchParams(location.search).get("mode");
+
   return (
     <>
       <Flex
@@ -30,17 +33,18 @@ const HomeBar = () => {
           display={{ base: "block", md: "none" }}
         />
 
-        <Flex className={"HomeBarText"} flexDirection={"row"} gap={10}>
+        <Flex flexDirection={"row"} gap={10}>
           <Link
-            className={"homeLink"}
             to={"/home?mode=mycar"}
             as={RouterLink}
             px={"2rem"}
             py={"0.5rem"}
             border={"2px solid black"}
             borderRadius={10}
+            fontWeight={600}
+            color={currentMode === "mycar" ? "#FFF" : "#000"}
+            backgroundColor={currentMode === "mycar" ? "#000" : "transparent"}
             _hover={{ backgroundColor: "#000", color: "#FFF" }}
-            _active={{ backgroundColor: "#000", color: "#FFF" }}
           >
             <Text>My Car</Text>
           </Link>
@@ -53,8 +57,12 @@ const HomeBar = () => {
             py={"0.5rem"}
             border={"2px solid black"}
             borderRadius={10}
+            fontWeight={600}
+            color={currentMode === "forum" ? "#FFF" : "#000"}
+            backgroundColor={
+              currentMode === "forum" ? "#000" : "transparent"
+            }
             _hover={{ backgroundColor: "#000", color: "#FFF" }}
-            _active={{ backgroundColor: "#000", color: "#FFF" }}
           >
             <Text>Forum</Text>
           </Link>

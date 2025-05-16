@@ -26,7 +26,7 @@ const AuthPage = () => {
         <Flex justify={"center"} align={"center"}>
           <Container
             maxW={"max-content"}
-            h={"50vh"}
+            h={"max-content"}
             p={"1rem"}
             border={"2px solid black"}
             borderRadius={"0.5rem"}

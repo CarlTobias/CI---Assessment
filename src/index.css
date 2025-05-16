@@ -4,99 +4,26 @@
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/Montserrat-VariableFont.ttf");
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.ttf");
 }
 
-/* Global */
 body {
-  /* overflow-x: hidden; */
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  font-family: "Poppins";
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-/* AuthForm Section */
-.formHeader {
-  font-family: "OpenSans";
-  font-weight: 900;
-  color: #90030c;
-}
-
-.inputText {
-  font-family: "Montserrat";
-  font-weight: 500;
-}
-
 Input {
   font-family: "OpenSans";
-}
-
-Button {
-  font-family: "Montserrat";
-}
-
-.signUpText1 {
-  font-family: "Montserrat";
-  font-weight: 350;
-  color: #3f3f3f;
-}
-
-.signUpText2 {
-  font-family: "Montserrat";
-  font-weight: 600;
-  color: #3f3f3f;
-}
-
-/* LandingPage */
-.landingBarText {
-  font: "Montserrat";
-  font-weight: 600;
-  color: #fff;
-}
-
-.landingHeroHeader {
-  font: "Montserrat";
-  font-weight: 350;
-  color: #fff;
-}
-
-.landingHeroSubtitle {
-  font: "Montserrat";
-  font-weight: 600;
-  color: #fff;
-}
-
-.aboutHeader {
-  font: "Montserrat";
-  font-weight: 700;
-  color: #000;
-}
-
-.aboutSubtitle {
-  font: "Montserrat";
-  font-weight: 600;
-  color: #000;
-}
-
-/* HomeBar and HomePage */
-.homeLink {
-  font: "Montserrat";
-  font-weight: 600;
-  color: #000;
 }
 
 .joinRevUp {
   letter-spacing: 4px;
   text-shadow: 3px 5px 12px rgba(0, 0, 0, 0.4);
-}
-
-/* Forum Page */
-.titleTextForum {
-  font: "Montserrat";
-  font-weight: 600;
-  color: #000;
 }

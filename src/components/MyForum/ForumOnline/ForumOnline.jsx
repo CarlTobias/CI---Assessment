@@ -4,24 +4,34 @@ import ForumPosts from "./ForumPosts/ForumPosts";
 const ForumOnline = () => {
   return (
     <>
-      <Flex flexDirection={"column"} w={"40vw"} h={"100vh"} gap={3} justify={"start"}>
-        <Box className={"titleTextForum"} w={"100%"} fontSize={32}>
+      <Flex flexDirection={"column"} gap={5} justify={"center"}>
+        <Box
+          w={"100%"}
+          fontWeight={600}
+          fontSize={{ base: "lg", md: "xl", lg: 28, xl: "4xl" }}
+          color={"#000"}
+        >
           Online Forum
         </Box>
 
-        <Flex w={"100%"} borderRadius={5} boxShadow={"2xl"}>
-          <Flex justify={"center"} align={"center"} gap={2} w={"100%"} p={5}>
+        <Flex flexDirection={"column"} gap={10}>
+          <Flex
+            justify={"center"}
+            align={"center"}
+            gap={2}
+            w={"100%"}
+            p={5}
+            borderRadius={5}
+            boxShadow={"2xl"}
+            border={"0.5px solid #000"}
+          >
             <Avatar size={"lg"} />
-            <Input
-              border={"0px"}
-              placeholder={"What's on your mind?"}
-            />
+            <Input border={"0px"} placeholder={"What's on your mind?"} />
           </Flex>
-        </Flex>
 
-        <ForumPosts />
+          <ForumPosts />
+        </Flex>
       </Flex>
-      {/* Fix */}
     </>
   );
 };
