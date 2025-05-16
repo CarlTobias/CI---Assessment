@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Button, Container, Flex, Input, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
@@ -38,7 +46,7 @@ const AuthForm = () => {
         <VStack gap={5}>
           {!isLogin ? (
             <Container>
-              <Text className={"inputText"}>Username</Text>
+              <Text fontWeight={500}>Username</Text>
               <Input
                 borderColor={"#292929"}
                 borderRadius={5}
@@ -56,7 +64,7 @@ const AuthForm = () => {
           ) : null}
 
           <Container>
-            <Text className={"inputText"}>Email Address</Text>
+            <Text fontWeight={500}>Email Address</Text>
             <Input
               borderColor={"#292929"}
               borderRadius={5}
@@ -71,7 +79,7 @@ const AuthForm = () => {
           </Container>
 
           <Container>
-            <Text className={"inputText"}>Password</Text>
+            <Text fontWeight={500}>Password</Text>
             <Input
               borderColor={"#292929"}
               borderRadius={5}
@@ -89,7 +97,7 @@ const AuthForm = () => {
 
           {!isLogin ? (
             <Container>
-              <Text className={"inputText"}>Confirm Password</Text>
+              <Text fontWeight={500}>Confirm Password</Text>
               <Input
                 borderColor={"#292929"}
                 borderRadius={5}
@@ -120,19 +128,19 @@ const AuthForm = () => {
 
           <Box mt={-2}>
             <Flex justify={"center"} align={"center"}>
-              <Box className={"signUpText1"} mx={2} fontSize={14}>
+              <Box mx={2} fontWeight={350} fontSize={14} color={"#3f3f3f"}>
                 {isLogin
                   ? "Don't have an account?"
                   : "Already have an account?"}
               </Box>
 
               <Box
-                className={"signUpText2"}
+                fontWeight={600}
                 fontSize={14}
+                color={"#90030C"}
                 onClick={() =>
                   navigate(`/auth?mode=${isLogin ? "signup" : "login"}`)
                 }
-                color={"#90030C"}
                 cursor={"pointer"}
                 _hover={{ textDecoration: "underline" }}
               >

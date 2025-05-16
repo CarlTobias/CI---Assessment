@@ -29,7 +29,7 @@ const LandingBar = () => {
           display={{ base: "block", md: "none" }}
         />
 
-        <Flex className={"landingBarText"} flexDirection={"row"} gap={3}>
+        <Flex flexDirection={"row"} gap={3} fontWeight={600} color={"#FFF"}>
           <Link to={"/auth?mode=signup"} as={RouterLink}>
             <Text>Sign Up</Text>
           </Link>

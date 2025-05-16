@@ -1,6 +1,7 @@
 import React from "react";
 import "../../index.css";
 
+
 import {
   Box,
   Container,
@@ -37,20 +38,22 @@ const LandingPage = () => {
               gap={5}
             >
               <Text
-                className={"landingHeroHeader"}
                 fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
                 textAlign={{ base: "center", md: "left" }}
                 px={{ base: "1rem", md: "5rem" }}
                 py={{ base: "1rem", md: "2rem" }}
+                fontWeight={350}
+                color={"#FFF"}
               >
                 Stay on Track <br /> Stay on the Road
               </Text>
 
               <Text
-                className={"landingHeroSubtitle"}
                 fontSize={{ base: "md", md: "lg", lg: "xl" }}
                 textAlign={{ base: "center", md: "left" }}
                 px={{ base: "1rem", md: "5rem" }}
+                fontWeight={600}
+                color={"#FFF"}
               >
                 Rev up your ride with our all-in-one platform—where car care
                 meets community!
@@ -68,15 +71,16 @@ const LandingPage = () => {
             p={0}
             m={0}
           >
-            <Text className={"aboutHeader"} fontSize={50} pt={"4rem"}>
+            <Text pt={"4rem"} fontWeight={700} fontSize={50} color={"#000"}>
               About Us
             </Text>
             <Text
-              className={"aboutSubtitle"}
               align={"right"}
               w={"45vw"}
-              fontSize={25}
               pt={"4rem"}
+              fontWeight={600}
+              fontSize={25}
+              color={"#000"}
             >
               Our platform is a comprehensive tool designed to help car owners
               and enthusiasts effortlessly manage vehicle maintenance while
@@ -182,12 +186,18 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            <Image src="public\images\tool.png" alt="Feature 1 Icon" boxSize="80px" mb={4} />
+            <Image
+              src="/images/tool.png"
+              alt="Feature 1 Icon"
+              boxSize="80px"
+              mb={4}
+            />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Track
             </Text>
             <Text w="80%">
-              This is the description of the first feature, showcasing how users benefit.
+              This is the description of the first feature, showcasing how users
+              benefit.
             </Text>
           </Box>
           <Box w="100%" h="100vh">
@@ -222,12 +232,18 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            <Image src="/images/People.png" alt="Feature 2 Icon" boxSize="80px" mb={4} />
+            <Image
+              src="/images/People.png"
+              alt="Feature 2 Icon"
+              boxSize="80px"
+              mb={4}
+            />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Connect
             </Text>
             <Text w="80%">
-              Insightful feature description to engage users and highlight value.
+              Insightful feature description to engage users and highlight
+              value.
             </Text>
           </Box>
 
@@ -243,12 +259,18 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            <Image src="public\images\Loc.png" alt="Feature 3 Icon" boxSize="80px" mb={4} />
+            <Image
+              src="public\images\Loc.png"
+              alt="Feature 3 Icon"
+              boxSize="80px"
+              mb={4}
+            />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Locate
             </Text>
             <Text w="80%">
-              Feature details that help users understand what’s unique or powerful.
+              Feature details that help users understand what’s unique or
+              powerful.
             </Text>
           </Box>
           <Box w="100%" h="100vh">
@@ -282,7 +304,12 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            <Image src="public\images\Paper.png" alt="Feature 4 Icon" boxSize="80px" mb={4} />
+            <Image
+              src="public\images\Paper.png"
+              alt="Feature 4 Icon"
+              boxSize="80px"
+              mb={4}
+            />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Record
             </Text>
@@ -293,64 +320,65 @@ const LandingPage = () => {
         </SimpleGrid>
       </Box>
 
-      <Text fontSize="9xl"fontWeight="Bold">JOIN REV UP NOW</Text>
+      <Text fontSize="9xl" fontWeight="Bold">
+        JOIN REV UP NOW
+      </Text>
 
       <Box
-  display="flex"
-  justifyContent="center"
-  alignItems="center"
-  w="100%"
-  h={{ base: "200px", md: "400px" }}
-  my="4rem"
->
-  <Image
-    src="public\images\Showcase.png" 
-    alt="Centered Display"
-    objectFit="contain"
-    maxH="100%"
-    maxW="90%"
-    borderRadius="xl"
-    boxShadow="xl"
-  />
-</Box>
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        w="100%"
+        h={{ base: "200px", md: "400px" }}
+        my="4rem"
+      >
+        <Image
+          src="public\images\Showcase.png"
+          alt="Centered Display"
+          objectFit="contain"
+          maxH="100%"
+          maxW="90%"
+          borderRadius="xl"
+          boxShadow="xl"
+        />
+      </Box>
 
+      {/* Full Width Image with Box Blur Overlay Section */}
+      <Box position="relative" w="100vw" h="100vh" mt="10rem">
+        <Image
+          src="/images/CarHome.png"
+          alt="Full Background"
+          w="100%"
+          h="100%"
+          objectFit="cover"
+        />
 
-{/* Full Width Image with Box Blur Overlay Section */}
-<Box position="relative" w="100vw" h="100vh" mt="10rem">
-  <Image
-    src="/images/CarHome.png"
-    alt="Full Background"
-    w="100%"
-    h="100%"
-    objectFit="cover"
-  />
-
-  {/* Only this Box has the blur, not the full image */}
-  <Box
-    position="absolute"
-    top="50%"
-    left="50%"
-    transform="translate(-50%, -50%)"
-    backgroundColor="rgba(20, 20, 20, 0.62)"
-    backdropFilter="blur(8px)"
-    px="3rem"
-    py="2rem"
-    borderRadius="lg"
-    boxShadow="xl"
-    display="flex"
-    justifyContent="center"
-    alignItems="center"
-  >
-    <Text
-      color="white"
-      fontSize={{ base: "3xl", md: "5xl" }}
-      fontWeight="bold"
-      textAlign="center"
-    >
-      Redirect to Forum
-    </Text>
-  </Box>
-</Box>
+        {/* Only this Box has the blur, not the full image */}
+        <Box
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          backgroundColor="rgba(20, 20, 20, 0.62)"
+          backdropFilter="blur(8px)"
+          px="3rem"
+          py="2rem"
+          borderRadius="lg"
+          boxShadow="xl"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text
+            color="white"
+            fontSize={{ base: "3xl", md: "5xl" }}
+            fontWeight="bold"
+            textAlign="center"
+          >
+            Redirect to Forum
+          </Text>
+        </Box>
+      </Box>
     </>
   );
 };

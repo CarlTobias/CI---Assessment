@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 import HomeBar from "../../components/HomeBar/HomeBar";
 import MyCar from "../../components/MyCar/MyCar";
 import MyForum from "../../components/MyForum/MyForum";
-import MyCar from "../../components/MyCar/MyCar";
 
 const HomePage = () => {
   const useQuery = () => {

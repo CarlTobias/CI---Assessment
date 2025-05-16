@@ -1,12 +1,24 @@
-import React from "react";
-
-import { Avatar, Box, Flex, Input } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import GaragesNearMe from "./GaragesNearMe/GaragesNearMe";
 
 const ForumNearMe = () => {
   return (
-    <Flex border={"2px solid green"} w={"25vw"} justify={"center"}>
-      <Flex className={"titleTextForum"} w={"100vw"} fontSize={32}>Garages Near Me</Flex>
-    </Flex>
+    <>
+      <Flex flexDirection={"column"} gap={5} justify={"center"}>
+        <Box
+          w={"100%"}
+          fontWeight={600}
+          fontSize={{ md: "xl", lg: 28, xl: "4xl" }}
+          color={"#000"}
+        >
+          Garages Near Me
+        </Box>
+
+        <Flex flexDirection={"column"} gap={10}>
+          <GaragesNearMe />
+        </Flex>
+      </Flex>
+    </>
   );
 };
 
