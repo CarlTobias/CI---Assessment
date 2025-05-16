@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Box,
@@ -7,13 +7,18 @@ import {
   Flex,
   Input,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import authStore from "../../stores/authStore";
 
 const AuthForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const login = authStore((state) => state.login);
+
+  const toast = useToast();
 
   const queryParams = new URLSearchParams(location.search);
   const mode = queryParams.get("mode");
@@ -31,13 +36,84 @@ const AuthForm = () => {
     confirmPassword: "",
   });
 
-  const handleAuth = () => {
-    if (!inputs.email || !inputs.password) {
-      alert("Please fill out all fields");
+  const handleAuth = async () => {
+    const { username, email, password, confirmPassword } = inputs;
+
+    if (!email || !password || (!isLogin && (!confirmPassword || !username))) {
+      toast({
+        title: "Missing fields",
+        description: "Please fill out all the fields.",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (!isLogin && password !== confirmPassword) {
+      toast({
+        title: "Password mismatch",
+        description: "Passwords do not match.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
       return;
     }
 
-    navigate("/home?mode=forum");
+    try {
+      const url = isLogin ? "/api/login" : "/api/register";
+      const res = await fetch("http://localhost:3000" + url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+          ...(isLogin ? {} : { username }),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        toast({
+          title: "Authentication failed",
+          description: data.error || "Something went wrong.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+
+      if (isLogin) {
+        login(data.user);
+        toast({
+          title: "Login successful",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        navigate("/home?mode=forum");
+      } else {
+        toast({
+          title: "Registration successful",
+          description: "Please log in to continue.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setIsLogin(true);
+      }
+    } catch (err) {
+      console.error("Auth error:", err);
+      toast({
+        title: "Network error",
+        description: "Please check the console for more details.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (

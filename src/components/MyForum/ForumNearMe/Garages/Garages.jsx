@@ -1,9 +1,16 @@
-import { AspectRatio, Box, Button, Flex, Image } from "@chakra-ui/react";
+import { useState } from "react";
+import { AspectRatio, Box, Flex, Image } from "@chakra-ui/react";
 
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaBookmark } from "react-icons/fa6";
 
 const Garages = () => {
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = () => {
+    setSaved(!saved);
+  };
+
   return (
     <>
       <Flex
@@ -17,30 +24,41 @@ const Garages = () => {
         backgroundColor={"#F5F5F5"}
         border={"0.5px solid #000"}
       >
-
         <Flex w={"100%"} flexDirection={"column"} gap={2}>
-          <Flex gap={3}>
-            <AspectRatio ratio={1} w={{ lg: "0", xl: "50%" }} h={"100%"}>
-              <Image
-                src={"/images/garageImagePlaceholder.jpg"}
-                alt="img.jpeg"
-                w={"50%"}
-                h={"100%"}
-                borderRadius={5}
-                objectFit={"cover"}
-                display={{ lg: "none", xl: "block" }}
-              />
-            </AspectRatio>
+          <Flex gap={3} align={"stretch"}>
+            <Flex
+              align="center"
+              justify="center"
+              w={{ lg: "0", xl: "50%" }}
+              display={{ lg: "none", xl: "flex" }}
+            >
+              <AspectRatio ratio={1} w="100%">
+                <Image
+                  src={"/images/garageImagePlaceholder.jpg"}
+                  alt="img.jpeg"
+                  w="100%"
+                  h="100%"
+                  borderRadius={5}
+                  objectFit="cover"
+                />
+              </AspectRatio>
+            </Flex>
 
             <Flex
               flexDirection={{ md: "row-reverse", xl: "column" }}
+              gap={{ md: 3, xl: 0 }}
               w={"100%"}
               minH={"100%"}
               justify={"space-between"}
             >
-              <Flex justify={"right"} align={{md: "center", xl: "flex-end"}}>
-                <Box>
-                  <FaRegBookmark />
+              <Flex justify={"right"} align={{ md: "center", xl: "flex-end" }}>
+                <Box
+                  fontSize={{ md: 20, lg: 26, xl: 28 }}
+                  color={saved ? "#90030C" : "black"}
+                  _hover={{ color: "#90030C" }}
+                  onClick={handleSave}
+                >
+                  {saved ? <FaBookmark /> : <FaRegBookmark />}
                 </Box>
               </Flex>
 
