@@ -29,7 +29,7 @@ const AuthForm = () => {
       return;
     }
 
-    navigate("/home");
+    navigate("/home?mode=forum");
   };
 
   return (
