@@ -38,15 +38,15 @@ Input {
   background: linear-gradient(
     120deg,
     #ffffff 0%,
-    #292929 20%,
-    #90030C 40%,
-    #F5EFE7 60%
+    #90030c 20%,
+    #292929 40%,
+    #f5efe7 60%
   );
   background-size: 200% auto;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: swoosh 4s ease-in-out infinite;
+  animation: swoosh 18s ease-in infinite;
 }
 
 @keyframes swoosh {
@@ -56,4 +56,19 @@ Input {
   100% {
     background-position: -200% center;
   }
+}
+
+@keyframes backgroundZoomPan {
+  0% {
+    background-size: 100%;
+    background-position: center;
+  }
+  100% {
+    background-size: 110%;
+    background-position: 50% 45%;
+  }
+}
+
+.animated-landing {
+  animation: backgroundZoomPan 30s linear;
 }
