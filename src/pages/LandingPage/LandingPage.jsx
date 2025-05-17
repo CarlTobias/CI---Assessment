@@ -1,6 +1,7 @@
 import React from "react";
 import "../../index.css";
-
+import BackgroundBeams from "../../components/BackgroundBeams";
+import Typewriter from "../../components/Typewriter";
 
 import {
   Box,
@@ -14,57 +15,71 @@ import LandingBar from "../../components/LandingBar/LandingBar";
 import Footer from "../../components/LandingFooter/LandingFooter";
 import { MdBuild } from "react-icons/md";
 
-
 const LandingPage = () => {
   return (
     <>
       <Flex minH={"100vh"} minW={"100vw"} flexDirection={"column"} gap={10}>
-        <Flex
-          w={"100vw"}
-          h={"100vh"}
-          backgroundImage={"url('/images/landingBackground.png')"}
-          backgroundSize={"cover"}
-          backgroundPosition={"center"}
-          flexDirection={"column"}
-        >
-          <LandingBar />
+      <Flex
+  w={"100vw"}
+  h={"100vh"}
+  position="relative"
+  flexDirection={"column"}
+>
+  {/* Background Glare Layer */}
+  <Box
+    position="absolute"
+    top={0}
+    left={0}
+    w="100%"
+    h="100%"
+    zIndex={0}
+  >
+    <BackgroundBeams         
+     imgSrc="/images/landingBackground.png"
+    className="rounded-none" />
+  </Box>
 
-          <Container
-            maxW={"100%"}
-            h={"100%"}
-            display={"flex"}
-            alignItems={"center"}
-          >
-            <Flex
-              w={{ base: "90vw", md: "50vw" }}
-              flexDirection={"column"}
-              gap={5}
-            >
-              <Text
-                fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
-                textAlign={{ base: "center", md: "left" }}
-                px={{ base: "1rem", md: "5rem" }}
-                py={{ base: "1rem", md: "2rem" }}
-                fontWeight={350}
-                color={"#FFF"}
-              >
-                Stay on Track <br /> Stay on the Road
-              </Text>
-
-              <Text
-                fontSize={{ base: "md", md: "lg", lg: "xl" }}
-                textAlign={{ base: "center", md: "left" }}
-                px={{ base: "1rem", md: "5rem" }}
-                fontWeight={600}
-                color={"#FFF"}
-              >
-                Rev up your ride with our all-in-one platform—where car care
-                meets community!
-              </Text>
-            </Flex>
-          </Container>
-        </Flex>
-
+  {/* Foreground Content */}
+  <Box zIndex={1} w="100%">
+    <LandingBar />
+    <Container
+      maxW={"100%"}
+      h={"100%"}
+      display={"flex"}
+      alignItems={"center"}
+    >
+      <Flex
+        w={{ base: "90vw", md: "50vw" }}
+        flexDirection={"column"}
+        gap={5}
+      >
+    <Box px={{ base: "1rem", md: "5rem" }} py={{ base: "1rem", md: "2rem" }}>
+      <Text
+        fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+        textAlign={{ base: "center", md: "left" }}
+        fontWeight={550}
+        className="swoosh-text"
+        whiteSpace="pre-line"
+      >
+        {`Stay on Track\nStay on the Road`}
+      </Text>
+    </Box>
+        
+        <Typewriter
+          text="Our platform is a comprehensive tool designed to help car owners and enthusiasts effortlessly manage vehicle maintenance while building a community around."
+          fontSize={{ base: "md", md: "lg", lg: "xl" }}
+          delay={25}
+          textAlign={{ base: "center", md: "left" }}
+          px={{ base: "1rem", md: "5rem" }}
+          fontWeight={600}
+          whiteSpace={"pre-line"}
+          color={"#FFF"}
+        />
+        
+      </Flex>
+    </Container>
+  </Box>
+</Flex>
 
         <Flex w={"100vw"} h={"100vh"} align={"center"} flexDirection={"column"}>
           <Box
@@ -95,7 +110,7 @@ const LandingPage = () => {
           <Box display={"flex"} flex={1} alignItems={"center"}>
             <Box
               backdropFilter="blur(18px)"
-              backgroundColor="rgba(217, 217, 217, 0.6)" 
+              backgroundColor="rgba(217, 217, 217, 0.6)"
               h={"300px"}
               w={"300px"}
               mt={-300}
@@ -104,24 +119,31 @@ const LandingPage = () => {
               borderRadius={18}
               p={"2rem"}
             >
-         
-              <Box mb="1rem" color="white" backgroundColor="#000000" p="0.5rem" borderRadius="16" display="inline-block">
+              <Box
+                mb="1rem"
+                color="white"
+                backgroundColor="#000000"
+                p="0.5rem"
+                borderRadius="16"
+                display="inline-block"
+              >
                 <MdBuild size="40px" />
-                </Box>
-                <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
-                  Easy to Apply
-                </Text>
-                
-                <Text fontSize="sm">
-                  Manage vehicle maintenance easily and efficiently with our streamlined platform.
-                  </Text>
               </Box>
+              <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
+                Easy to Apply
+              </Text>
+
+              <Text fontSize="sm">
+                Manage vehicle maintenance easily and efficiently with our
+                streamlined platform.
+              </Text>
+            </Box>
 
             <Image src="/images/car.png" alt="car.png" h={"80%"} />
 
             <Box
               backdropFilter="blur(18px)"
-              backgroundColor="rgba(217, 217, 217, 0.6)" 
+              backgroundColor="rgba(217, 217, 217, 0.6)"
               h={"300px"}
               w={"300px"}
               mb={-200}
@@ -130,18 +152,25 @@ const LandingPage = () => {
               borderRadius={18}
               p={"2rem"}
             >
-   
-              <Box mb="1rem" color="white" backgroundColor="#90030C" p="0.5rem" borderRadius="16" display="inline-block">
+              <Box
+                mb="1rem"
+                color="white"
+                backgroundColor="#90030C"
+                p="0.5rem"
+                borderRadius="16"
+                display="inline-block"
+              >
                 <MdBuild size="40px" />
-                </Box>
-                
-                <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
-                  Easy to Apply
-                  </Text>
-                  
-                  <Text fontSize="sm">
-                    Manage vehicle maintenance easily and efficiently with our streamlined platform.
-                  </Text>
+              </Box>
+
+              <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
+                Easy to Apply
+              </Text>
+
+              <Text fontSize="sm">
+                Manage vehicle maintenance easily and efficiently with our
+                streamlined platform.
+              </Text>
             </Box>
           </Box>
         </Flex>
@@ -324,8 +353,12 @@ const LandingPage = () => {
             h="100vh"
             textAlign="center"
           >
-            
-            <Image src="/images/Paper.png" alt="Feature 4 Icon" boxSize="80px" mb={4} />
+            <Image
+              src="/images/Paper.png"
+              alt="Feature 4 Icon"
+              boxSize="80px"
+              mb={4}
+            />
             <Text fontSize="6xl" fontWeight="bold" mb={2}>
               Record
             </Text>
@@ -336,138 +369,149 @@ const LandingPage = () => {
         </SimpleGrid>
       </Box>
 
-      <Text fontSize={{ base: "80px", md: "170px" }} fontWeight="Bold">JOIN REV UP NOW</Text>
+      <Text fontSize={{ base: "80px", md: "170px" }} fontWeight="Bold">
+        JOIN REV UP NOW
+      </Text>
 
       <Box
-       display="flex"
-       justifyContent="center"
-       alignItems="center"
-       w="100%"
-       h={{ base: "200px", md: "400px" }}
-       my="4rem">
-
-      <Image
-      src="/images\Showcase.png" 
-      alt="Centered Display"
-      objectFit="contain"
-      maxH="100%"
-      maxW="90%"
-      borderRadius="xl"
-      boxShadow="xl"
-      />
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        w="100%"
+        h={{ base: "200px", md: "400px" }}
+        my="4rem"
+      >
+        <Image
+          src="/images\Showcase.png"
+          alt="Centered Display"
+          objectFit="contain"
+          maxH="100%"
+          maxW="90%"
+          borderRadius="xl"
+          boxShadow="xl"
+        />
       </Box>
 
-  <Box position="relative" w="100vw" h="100vh" mt="10rem">
-  <Image
-    src="/images/CarHome.png"
-    alt="Full Background"
-    w="100%"
-    h="100%"
-    objectFit="cover"
-  />
+      <Box position="relative" w="100vw" h="100vh" mt="10rem">
+        <Image
+          src="/images/CarHome.png"
+          alt="Full Background"
+          w="100%"
+          h="100%"
+          objectFit="cover"
+        />
 
-  <Box
-    position="absolute"
-    top="50%"
-    left="50%"
-    transform="translate(-50%, -50%)"
-    backgroundColor="rgba(20, 20, 20, 0.62)"
-    backdropFilter="blur(8px)"
-    px="3rem"
-    py="2rem"
-    borderRadius="lg"
-    boxShadow="xl"
-    display="flex"
-    flexDirection="column"
-    justifyContent="center"
-    alignItems="center"
-    gap="2rem"
-  >
-    <Text
-      color="white"
-      fontSize={{ base: "3xl", md: "5xl" }}
-      fontWeight="bold"
-      textAlign="center"
-       mb="0"
-    >
-      Redirect to Forum
-    </Text>
-    <Text
-      color="white"
-      fontSize={{ base: "3xl", md: "2xl" }}
-      textAlign="center"
-    >
-      Popular Topics
-    </Text>
-
-    {/* 3-Column Grid */}
-    <Box
-      display="flex"
-      flexWrap="wrap"
-      gap="1.5rem"
-      justifyContent="center"
-    >
-      {[1, 2, 3].map((item) => (
         <Box
-          key={item}
-          backgroundColor="rgba(217, 217, 217, 0.28)"
-          border="1px solid white"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          backgroundColor="rgba(20, 20, 20, 0.62)"
+          backdropFilter="blur(8px)"
+          px="3rem"
+          py="2rem"
           borderRadius="lg"
-          p="1rem"
-          width={{ base: "100%", md: "200px" }}
+          boxShadow="xl"
           display="flex"
           flexDirection="column"
+          justifyContent="center"
           alignItems="center"
-          textAlign="center"
+          gap="2rem"
         >
-          <Image
-            src="/images/profile-placeholder.png"
-            alt="Profile"
-            borderRadius="full"
-            boxSize="60px"
-            mb="0.5rem"
-          />
-          <Text fontWeight="bold" color="white" mb="0.5rem">
-            Topic Title {item}
+          <Text
+            color="white"
+            fontSize={{ base: "3xl", md: "5xl" }}
+            fontWeight="bold"
+            textAlign="center"
+            mb="0"
+          >
+            Redirect to Forum
           </Text>
-          <Text color="white" fontSize="sm" textDecoration="underline" cursor="pointer">
-            Read More
+          <Text
+            color="white"
+            fontSize={{ base: "3xl", md: "2xl" }}
+            textAlign="center"
+          >
+            Popular Topics
           </Text>
+
+          {/* 3-Column Grid */}
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            gap="1.5rem"
+            justifyContent="center"
+          >
+            {[1, 2, 3].map((item) => (
+              <Box
+                key={item}
+                backgroundColor="rgba(217, 217, 217, 0.28)"
+                border="1px solid white"
+                borderRadius="lg"
+                p="1rem"
+                width={{ base: "100%", md: "200px" }}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                textAlign="center"
+              >
+                <Image
+                  src="/images/profile-placeholder.png"
+                  alt="Profile"
+                  borderRadius="full"
+                  boxSize="60px"
+                  mb="0.5rem"
+                />
+                <Text fontWeight="bold" color="white" mb="0.5rem">
+                  Topic Title {item}
+                </Text>
+                <Text
+                  color="white"
+                  fontSize="sm"
+                  textDecoration="underline"
+                  cursor="pointer"
+                >
+                  Read More
+                </Text>
+              </Box>
+            ))}
+          </Box>
+
+          {/* Single Box Below */}
+          <Box
+            backgroundColor="rgba(217, 217, 217, 0.28)"
+            border="1px solid white"
+            borderRadius="lg"
+            p="1rem"
+            width={{ base: "100%", md: "640px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+          >
+            <Image
+              src="/images/profile-placeholder.png"
+              alt="Profile"
+              borderRadius="full"
+              boxSize="60px"
+              mb="0.5rem"
+            />
+            <Text fontWeight="bold" color="white" mb="0.5rem">
+              Featured Topic Title
+            </Text>
+            <Text
+              color="white"
+              fontSize="sm"
+              textDecoration="underline"
+              cursor="pointer"
+            >
+              Read More
+            </Text>
+          </Box>
         </Box>
-      ))}
-    </Box>
+      </Box>
 
-    {/* Single Box Below */}
-    <Box
-      backgroundColor="rgba(217, 217, 217, 0.28)"
-      border="1px solid white"
-      borderRadius="lg"
-      p="1rem"
-      width={{ base: "100%", md: "640px" }}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      textAlign="center"
-    >
-      <Image
-        src="/images/profile-placeholder.png"
-        alt="Profile"
-        borderRadius="full"
-        boxSize="60px"
-        mb="0.5rem"
-      />
-      <Text fontWeight="bold" color="white" mb="0.5rem">
-        Featured Topic Title
-      </Text>
-      <Text color="white" fontSize="sm" textDecoration="underline" cursor="pointer">
-        Read More
-      </Text>
-    </Box>
-  </Box>
-</Box>
-
-<Footer />
-
+      <Footer />
     </>
   );
 };

@@ -3,9 +3,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import path from "path";
 
 import User from "./models/User.js";
+import postRoutes from "./routes/Posts.js";
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -82,6 +82,9 @@ app.post("/api/login", async (req, res) => {
     res.status(500).json({ error: "Login Failed" });
   }
 });
+
+// Posting on the Forum
+app.use("/api/posts", postRoutes);
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");

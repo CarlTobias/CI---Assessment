@@ -1,6 +1,17 @@
-import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 
-const ForumPost = () => {
+import AddResponse from "../AddResponse/AddResponse";
+
+const ForumPost = ({ post }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Flex
@@ -15,26 +26,30 @@ const ForumPost = () => {
         border={"0.5px solid #000"}
       >
         <Box fontWeight={700} fontSize={32}>
-          Title Text Placeholder
+          {post.title}
         </Box>
         <Flex w={"100%"} flexDirection={"column"} gap={2}>
           <Flex gap={3}>
-            <Avatar size={{ base: "md", md: "lg" }} />
+            <Avatar
+              size={{ base: "md", md: "lg" }}
+              src={post.author?.profilePic}
+            />
             <Flex flexDirection={"column"} justify={"center"}>
               <Box fontWeight={500} fontSize={{ base: "md", md: "lg" }}>
-                Name Placeholder
+                {post.author?.username}
               </Box>
               <Box fontWeight={300} fontSize={"sm"}>
-                Location Placeholder
+                {new Date(post.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
               </Box>
             </Flex>
           </Flex>
 
           <Text w={"100%"} fontWeight={400} fontSize={{ base: "md", md: "lg" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam eos
-            voluptates recusandae minus mollitia molestiae laudantium quo!
-            Provident eligendi mollitia blanditiis nam perferendis facilis
-            nihil?
+            {post.content}
           </Text>
         </Flex>
 
@@ -43,10 +58,13 @@ const ForumPost = () => {
             backgroundColor={"#292929"}
             color={"#FFF"}
             _hover={{ backgroundColor: "#90030C" }}
+            onClick={onOpen}
           >
             Add Response
           </Button>
         </Flex>
+
+        <AddResponse isOpen={isOpen} onClose={onClose} />
       </Flex>
     </>
   );
