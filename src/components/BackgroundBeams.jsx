@@ -30,15 +30,15 @@ export const BackgroundBeams = ({ imgSrc, children, className }) => {
 
   const backgroundStyle = {
     "--step": "5%",
-    "--foil-svg": `url("data:image/svg+xml,%3Csvg width='26' height='26' viewBox='0 0 26 26' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.99994 3.419C2.99994 3.419 21.6142 7.43646 22.7921 12.153C23.97 16.8695 3.41838 23.0306 3.41838 23.0306' stroke='white' stroke-width='5' stroke-miterlimit='3.86874' stroke-linecap='round' style='mix-blend-mode:darken'/%3E%3C/svg%3E")`,
+    "--foil-svg": `url("data:image/svg+xml,%3Csvg width='26' height='26' ...")`,
     "--pattern": "var(--foil-svg) center/100% no-repeat",
     "--rainbow":
-      "repeating-linear-gradient(0deg,rgb(255,119,115) calc(var(--step) * 1),rgba(255,237,95,1) calc(var(--step) * 2),rgba(168,255,95,1) calc(var(--step) * 3),rgba(131,255,247,1) calc(var(--step) * 4),rgba(120,148,255,1) calc(var(--step) * 5),rgb(216,117,255) calc(var(--step) * 6),rgb(255,119,115) calc(var(--step) * 7)) 0% var(--bg-y)/200% 700% no-repeat",
+      "repeating-linear-gradient(0deg, rgb(140,50,50) calc(var(--step) * 1), rgba(120,100,50,1) calc(var(--step) * 2), rgba(70,130,50,1) calc(var(--step) * 3), rgba(50,120,120,1) calc(var(--step) * 4), rgba(60,70,150,1) calc(var(--step) * 5), rgb(100,50,120) calc(var(--step) * 6), rgb(140,50,50) calc(var(--step) * 7)) 0% var(--bg-y)/200% 700% no-repeat",
     "--diagonal":
-      "repeating-linear-gradient(128deg,#0e152e 0%,hsl(180,10%,60%) 3.8%,hsl(180,10%,60%) 4.5%,hsl(180,10%,60%) 5.2%,#0e152e 10%,#0e152e 12%) var(--bg-x) var(--bg-y)/300% no-repeat",
+      "repeating-linear-gradient(128deg,#0a0a0a 0%,hsl(210,10%,30%) 4%,hsl(210,10%,30%) 5%,#0a0a0a 10%) var(--bg-x) var(--bg-y)/300% no-repeat",
     "--shade":
-      "radial-gradient(farthest-corner circle at var(--m-x) var(--m-y),rgba(255,255,255,0.1) 12%,rgba(255,255,255,0.15) 20%,rgba(255,255,255,0.25) 120%) var(--bg-x) var(--bg-y)/300% no-repeat",
-    backgroundBlendMode: "hue, hue, hue, overlay",
+      "radial-gradient(farthest-corner circle at var(--m-x) var(--m-y),rgba(255,255,255,0.05) 12%,rgba(255,255,255,0.1) 20%,rgba(255,255,255,0.15) 120%) var(--bg-x) var(--bg-y)/300% no-repeat",
+    backgroundBlendMode: "multiply, multiply, multiply, overlay", 
   };
 
   const updateStyles = () => {
@@ -59,7 +59,7 @@ export const BackgroundBeams = ({ imgSrc, children, className }) => {
       className="relative isolate [contain:layout_style] [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform w-full h-full"
       ref={refElement}
       onPointerMove={(event) => {
-        const rotateFactor = 0.015;
+        const rotateFactor = 0;
         const rect = event.currentTarget.getBoundingClientRect();
         const position = {
           x: event.clientX - rect.left,
@@ -106,12 +106,12 @@ export const BackgroundBeams = ({ imgSrc, children, className }) => {
       <div className="h-full grid will-change-transform origin-center transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] [transform:rotateY(var(--r-x))_rotateX(var(--r-y))] rounded-[var(--radius)] border-black-800 hover:[--opacity:0.6] hover:[--duration:200ms] hover:[--easing:linear] hover:filter-none overflow-hidden">
         {/* Image/Content */}
         <div className="w-full h-full grid [grid-area:1/1] mix-blend-soft-light [clip-path:inset(0_0_0_0_round_var(--radius))]">
-            <div className={cn("h-full w-full")} style={{ backgroundColor: "#90030C" }}>
+        <   div className={cn("h-full w-full")} style={{ backgroundColor: "#1a1a1a" }}>
             {imgSrc ? (
               <img
                 src={imgSrc}
                 alt="Glare card image"
-                className="h-full w-full object-cover border-8 border-slate-800"
+                className="h-full w-full object-cover border-8 border-slate-800 blur-[2px]"
               />
             ) : (
               children

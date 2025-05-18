@@ -1,7 +1,8 @@
-import React from "react";
 import "../../index.css";
 import BackgroundBeams from "../../components/BackgroundBeams";
 import Typewriter from "../../components/Typewriter";
+import AnimatedInfoCard from "../../components/AnimatedInfoCard";
+
 
 import {
   Box,
@@ -25,40 +26,28 @@ const LandingPage = () => {
     <>
       <Flex minH={"100vh"} minW={"100vw"} flexDirection={"column"} gap={10}>
       <Flex
-  w={"100vw"}
-  h={"100vh"}
-  position="relative"
-  flexDirection={"column"}
->
-  {/* Background Glare Layer */}
-  <Box
-    position="absolute"
-    top={0}
-    left={0}
-    w="100%"
-    h="100%"
-    zIndex={0}
-  >
-    <BackgroundBeams         
-     imgSrc="/images/landingBackground.png"
-    className="rounded-none" />
-  </Box>
-
-  {/* Foreground Content */}
-  <Box zIndex={1} w="100%">
+          w={"100vw"}
+          h={"100vh"}
+          backgroundImage={"url('/images/landingBackground.png')"}
+          backgroundSize={"cover"}
+          backgroundPosition={"center"}
+          flexDirection={"column"}
+          className={"animated-landing"} 
+        >
     <LandingBar />
     <Container
       maxW={"100%"}
       h={"100%"}
       display={"flex"}
       alignItems={"center"}
+      pt={{ base: "1rem", md: "7rem", lg: "2rem" }}
     >
       <Flex
         w={{ base: "90vw", md: "50vw" }}
         flexDirection={"column"}
         gap={5}
       >
-    <Box px={{ base: "1rem", md: "5rem" }} py={{ base: "1rem", md: "2rem" }}>
+    <Box px={{ base: "1rem", md: "5rem" }}>
       <Text
         fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
         textAlign={{ base: "center", md: "left" }}
@@ -83,7 +72,6 @@ const LandingPage = () => {
         
       </Flex>
     </Container>
-  </Box>
 </Flex>
 
         <Flex w={"100vw"} h={"100vh"} align={"center"} flexDirection={"column"}>
@@ -176,6 +164,7 @@ const LandingPage = () => {
                 Manage vehicle maintenance easily and efficiently with our
                 streamlined platform.
               </Text>
+  
             </Box>
           </Box>
         </Flex>
