@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const responseSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  username: String,
+  response: String,
+  createdAt: { type: Date, default: Date.now },
+});
+
 const PostSchema = new mongoose.Schema({
   title: String,
   content: String,
@@ -13,6 +20,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  responses: [responseSchema],
 });
 
 const Post = mongoose.model("Post", PostSchema, "Posts");

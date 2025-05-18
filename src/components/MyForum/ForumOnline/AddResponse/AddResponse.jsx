@@ -1,52 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
-  Button,
+  Avatar,
   Box,
+  Button,
   Divider,
   Flex,
-  Image,
-  Input,
+  FormControl,
   FormLabel,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  FormControl,
   ModalOverlay,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import authStore from "../../../../stores/authStore";
 
 import axios from "axios";
 
-const AddResponse = ({ isOpen, onClose }) => {
+const AddResponse = ({ isOpen, onClose, post }) => {
   const [response, setResponse] = useState("");
+  const [responses, setResponses] = useState(post.responses || []);
   const { user } = authStore();
 
+  // When the post changes, update local responses state
+  useEffect(() => {
+    setResponses(post.responses || []);
+  }, [post.responses]);
 
   const handleSubmit = async () => {
     try {
-      const formData = new FormData();
-      formData.append("response", response);
-      formData.append("userId", user._id);
-
       const res = await axios.post(
-        "http://localhost:3000/api/upload",
-        formData,
+        `http://localhost:3000/api/posts/${post._id}/respond`,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          userId: user._id,
+          response: response,
         }
       );
 
-      console.log("Uploaded post:", res.data);
+      console.log("Response from backend after posting:", res.data);
+
+      setResponses([...responses, res.data.response]);
       resetForm();
       onClose();
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Failed to upload post.");
+      alert("Failed to upload response.");
     }
   };
 
@@ -55,57 +57,103 @@ const AddResponse = ({ isOpen, onClose }) => {
   };
 
   return (
-    <>
-      <Modal
-        isCentered
-        size={{ base: "xl", md: "3xl" }}
-        isOpen={isOpen}
-        onClose={() => {
-          resetForm();
-          onClose();
-        }}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton color={"#000"} />
-          <ModalBody p={0} backgroundColor={"#FFF"} borderRadius={5}>
-            <Flex
-              flexDirection={"column"}
-              gap={5}
-              px={5}
-              py={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              <VStack align={"stretch"} spacing={4}>
-                <FormControl>
-                  <FormLabel color="#000">Response</FormLabel>
-                  <Input
-                    type="text"
-                    value={response}
-                    backgroundColor={"#292929"} // change color, its yucky
-                    color={"#FFF"}
-                    placeholder="Say your opinion..."
-                    _placeholder={{ color: "#FFFFFF99" }}
-                    onChange={(e) => setResponse(e.target.value)}
-                  />
-                </FormControl>
-              </VStack>
-
-              <Button
-                mt={"auto"}
-                backgroundColor="#292929"
-                color={"#FFF"}
-                fontWeight="bold"
-                _hover={{ backgroundColor: "#90030C" }}
-                onClick={handleSubmit}
-              >
-                Post
-              </Button>
+    <Modal
+      isCentered
+      size={{ base: "xl", md: "3xl" }}
+      isOpen={isOpen}
+      onClose={() => {
+        resetForm();
+        onClose();
+      }}
+    >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton color={"#000"} />
+        <ModalBody p={5} backgroundColor={"#FFF"} borderRadius={5}>
+          {/* === POST DATA === */}
+          <Box mb={4}>
+            <Text fontWeight={700} fontSize="2xl" mb={2}>
+              {post.title}
+            </Text>
+            <Flex align="center" gap={3}>
+              <Avatar size="sm" src={post.author?.profilePic} />
+              <Box>
+                <Text fontWeight={500}>{post.author?.username}</Text>
+                <Text fontSize="sm" color="gray.500">
+                  {new Date(post.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </Text>
+              </Box>
             </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+            <Text mt={3}>{post.content}</Text>
+          </Box>
+
+          <Divider my={4} />
+
+          {/* Responses */}
+          <Box maxH="200px" overflowY="auto" mb={5}>
+            {responses && responses.length > 0 ? (
+              [...responses].reverse().map((res, index) => (
+                <Flex
+                  key={index}
+                  mb={3}
+                  p={3}
+                  border="1px solid #ddd"
+                  borderRadius={5}
+                  backgroundColor="#f9f9f9"
+                  gap={3}
+                  flexDirection={"column"}
+                >
+                  <Flex gap={3} align={"center"}>
+                    <Avatar size="sm" src={res.profilePic} />
+                    <Flex flexDirection={"column"}>
+                      <Text fontWeight={600}>{res.username}</Text>
+                      <Text fontSize="sm" color="gray.600">
+                        {new Date(res.createdAt).toLocaleString()}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Box>
+                    <Text>{res.response}</Text>
+                  </Box>
+                </Flex>
+              ))
+            ) : (
+              <Text color="gray.500">No responses yet.</Text>
+            )}
+          </Box>
+
+          {/* Add a response */}
+          <VStack align={"stretch"} spacing={4}>
+            <FormControl>
+              <FormLabel color="#000">Your Response</FormLabel>
+              <Input
+                type="text"
+                value={response}
+                backgroundColor={"#292929"}
+                color={"#FFF"}
+                placeholder="Say your opinion..."
+                _placeholder={{ color: "#FFFFFF99" }}
+                onChange={(e) => setResponse(e.target.value)}
+              />
+            </FormControl>
+
+            <Button
+              backgroundColor="#292929"
+              color={"#FFF"}
+              fontWeight="bold"
+              _hover={{ backgroundColor: "#90030C" }}
+              onClick={handleSubmit}
+            >
+              Post
+            </Button>
+          </VStack>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

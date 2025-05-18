@@ -1,6 +1,7 @@
 import express from "express";
 
 import Post from "../models/Post.js";
+import User from "../models/User.js";
 
 const router = express.Router();
 
@@ -40,5 +41,42 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+// ADD a response
+router.post("/:postId/respond", async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const { userId, response } = req.body;
+
+    if (!userId || !response) {
+      return res
+        .status(400)
+        .json({ message: "Missing userId or response text" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    const newResponse = {
+      userId,
+      profilePic: user.profilePic,
+      username: user.username,
+      response: response,
+    };
+
+    post.responses.push(newResponse);
+    await post.save();
+
+    res
+      .status(200)
+      .json({ message: "Response added successfully", response: newResponse });
+  } catch (err) {
+    console.error("Add response error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 export default router;

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-// import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 import LandingPage from "./pages/LandingPage/LandingPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
@@ -14,12 +14,12 @@ function App() {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/landing2" element={<LandingPage2 />} />
-        <Route path="/home" element={<HomePage />} />
+        {/* <Route path="/home" element={<HomePage />} /> */}
 
         {/* Uncomment for final */}
-        {/* <Route element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
           <Route path="/home" element={<HomePage />} />
-        </Route> */}
+        </Route>
       </Routes>
     </>
   );

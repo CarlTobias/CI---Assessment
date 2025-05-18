@@ -64,7 +64,7 @@ const ForumPost = ({ post }) => {
           </Button>
         </Flex>
 
-        <AddResponse isOpen={isOpen} onClose={onClose} />
+        <AddResponse isOpen={isOpen} onClose={onClose} post={post} />
       </Flex>
     </>
   );
