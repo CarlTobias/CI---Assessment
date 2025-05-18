@@ -14,6 +14,11 @@ import {
 import LandingBar from "../../components/LandingBar/LandingBar";
 import Footer from "../../components/LandingFooter/LandingFooter";
 import { MdBuild } from "react-icons/md";
+import { motion } from "framer-motion";
+import InfiniteScrollText from "../../components/InfiniteScrollText";
+
+
+
 
 const LandingPage = () => {
   return (
@@ -369,28 +374,28 @@ const LandingPage = () => {
         </SimpleGrid>
       </Box>
 
-      <Text fontSize={{ base: "80px", md: "170px" }} fontWeight="Bold">
-        JOIN REV UP NOW
-      </Text>
+       <InfiniteScrollText />
 
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        w="100%"
-        h={{ base: "200px", md: "400px" }}
-        my="4rem"
-      >
-        <Image
-          src="/images\Showcase.png"
-          alt="Centered Display"
-          objectFit="contain"
-          maxH="100%"
-          maxW="90%"
-          borderRadius="xl"
-          boxShadow="xl"
-        />
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      w="100%"
+      h={{ base: "300px", md: "500px", lg: "600px" }} // increased heights
+      my="4rem"
+>
+     <Image
+      src="/images/Showcase.png" 
+      alt="Centered Display"
+      objectFit="contain"
+      height="100%"
+      width="auto"
+      maxH="100%"
+      maxW="100%"
+      borderRadius="xl"
+      boxShadow="xl"/>
       </Box>
+
 
       <Box position="relative" w="100vw" h="100vh" mt="10rem">
         <Image
