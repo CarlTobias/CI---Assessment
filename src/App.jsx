@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
