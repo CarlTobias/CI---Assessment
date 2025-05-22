@@ -21,7 +21,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSubmit }) => {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch('/api/vehicles', {
+      const res = await fetch('http://localhost:3000/api/vehicles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
