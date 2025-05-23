@@ -3,12 +3,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
 import User from "./models/User.js";
 import postRoutes from "./routes/Posts.js";
-import vehicleRoutes from "./routes/vehicleRoutes.js";
+// import vehicleRoutes from "./routes/vehicleRoutes.js";
 
 const app = express();
 
@@ -90,20 +90,7 @@ app.use("/api/posts", postRoutes);
 
 // My Car
 
-// Setup for __dirname in ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Middleware
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve uploaded files
-
-// Routes
-app.use("/api/vehicles", vehicleRoutes);
-
-// Root route (optional)
-app.get("/", (req, res) => {
-  res.send("🚗 Vehicle Management API Running");
-});
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
