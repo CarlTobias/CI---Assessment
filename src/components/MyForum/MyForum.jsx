@@ -1,5 +1,4 @@
 import { Box, Container, Grid } from "@chakra-ui/react";
-import ForumNearMe from "./ForumNearMe/ForumNearMe";
 import ForumOnline from "./ForumOnline/ForumOnline";
 
 const MyForum = () => {
@@ -10,18 +9,6 @@ const MyForum = () => {
         gap={6}
         alignItems="start"
       >
-        {/* Garages Near Me (left column) */}
-        <Box
-          display={{ base: "none", md: "block" }}
-          maxH="80vh"
-          overflowY="auto"
-          p={4}
-          borderRadius="2xl"
-          boxShadow="md"
-          bg="gray.50"
-        >
-          <ForumNearMe />
-        </Box>
 
         {/* Forum Posts (right column, scrollable) */}
         <Box
