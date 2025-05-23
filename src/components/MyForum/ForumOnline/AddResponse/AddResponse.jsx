@@ -69,14 +69,14 @@ const AddResponse = ({ isOpen, onClose, post }) => {
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton color={"#000"} />
-        <ModalBody p={5} backgroundColor={"#FFF"} borderRadius={5}>
+        <ModalBody p={8} backgroundColor={"#FFF"} borderRadius={5}>
           {/* === POST DATA === */}
           <Box mb={4}>
             <Text fontWeight={700} fontSize="2xl" mb={2}>
               {post.title}
             </Text>
-            <Flex align="center" gap={3}>
-              <Avatar size="sm" src={post.author?.profilePic} />
+            <Flex my={5} align="center" gap={3} >
+              <Avatar size="lg" src={post.author?.profilePic} />
               <Box>
                 <Text fontWeight={500}>{post.author?.username}</Text>
                 <Text fontSize="sm" color="gray.500">
@@ -108,10 +108,10 @@ const AddResponse = ({ isOpen, onClose, post }) => {
                   flexDirection={"column"}
                 >
                   <Flex gap={3} align={"center"}>
-                    <Avatar size="sm" src={res.profilePic} />
+                    <Avatar size="md" src={res.profilePic} />
                     <Flex flexDirection={"column"}>
                       <Text fontWeight={600}>{res.username}</Text>
-                      <Text fontSize="sm" color="gray.600">
+                      <Text fontSize="xs" color="gray.600">
                         {new Date(res.createdAt).toLocaleString()}
                       </Text>
                     </Flex>
@@ -132,6 +132,12 @@ const AddResponse = ({ isOpen, onClose, post }) => {
               <FormLabel color="#000">Your Response</FormLabel>
               <Input
                 type="text"
+                as="textarea"
+                p={2}
+                pl={3}
+                height="10vh"
+                textAlign="left"
+                verticalAlign="top"
                 value={response}
                 backgroundColor={"#292929"}
                 color={"#FFF"}
