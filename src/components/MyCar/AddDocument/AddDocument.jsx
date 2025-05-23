@@ -1,4 +1,3 @@
-// components/AddDocumentModal.jsx
 import {
   Modal,
   ModalOverlay,
@@ -12,20 +11,35 @@ import {
   FormLabel,
   FormControl,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const AddDocument = ({ isOpen, onClose, onSave }) => {
+const AddDocument = ({ isOpen, onClose, onSave, initialData = null }) => {
   const [name, setName] = useState("");
   const [issueDate, setIssueDate] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [file, setFile] = useState(null);
+
+  // Populate fields if editing
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name || "");
+      setIssueDate(initialData.issueDate?.split("T")[0] || "");
+      setExpiryDate(initialData.expiryDate?.split("T")[0] || "");
+      setFile(null); // Don’t pre-load file
+    } else {
+      setName("");
+      setIssueDate("");
+      setExpiryDate("");
+      setFile(null);
+    }
+  }, [initialData, isOpen]);
 
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("issueDate", issueDate);
     formData.append("expiryDate", expiryDate);
-    formData.append("file", file);
+    if (file) formData.append("file", file);
     onSave(formData);
     onClose();
   };
@@ -34,17 +48,24 @@ const AddDocument = ({ isOpen, onClose, onSave }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add Document</ModalHeader>
+        <ModalHeader>
+          {initialData ? "Edit Document" : "Add Document"}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
             <FormLabel>Document Name</FormLabel>
             <Input value={name} onChange={(e) => setName(e.target.value)} />
             <FormLabel mt={3}>Issue Date</FormLabel>
-            <Input type="date" onChange={(e) => setIssueDate(e.target.value)} />
+            <Input
+              type="date"
+              value={issueDate}
+              onChange={(e) => setIssueDate(e.target.value)}
+            />
             <FormLabel mt={3}>Expiry Date</FormLabel>
             <Input
               type="date"
+              value={expiryDate}
               onChange={(e) => setExpiryDate(e.target.value)}
             />
             <FormLabel mt={3}>Upload File</FormLabel>

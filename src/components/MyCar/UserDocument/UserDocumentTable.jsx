@@ -42,9 +42,23 @@ const UserDocumentTable = ({ documents = [], onEdit, onDelete }) => {
                   ? new Date(doc.expiryDate).toLocaleDateString()
                   : "No Date"}
               </Td>
-              <Td>Pending</Td>
               <Td>
-                {doc.filePath ? doc.filePath.split(/[/\\]/).pop() : "No File"}
+                {(() => {
+                  const today = new Date();
+                  const expiry = new Date(doc.expiryDate);
+                  const timeDiff = expiry - today;
+                  const daysLeft = timeDiff / (1000 * 60 * 60 * 24);
+
+                  if (!doc.filePath) return "Incomplete";
+                  if (!isNaN(expiry) && daysLeft < 0) return "Expired";
+                  if (!isNaN(expiry) && daysLeft <= 30) return "Almost Expired";
+                  return "Complete";
+                })()}
+              </Td>
+              <Td>
+                {doc.filePath
+                  ? doc.originalFileName || "Unnamed File"
+                  : "No File"}
               </Td>
               <Td display={"flex"} flexDirection={"row"} gap={2}>
                 {/* View Button */}

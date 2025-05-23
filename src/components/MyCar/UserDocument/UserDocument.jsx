@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useDisclosure
+} from "@chakra-ui/react";
 import UserDocumentTable from "./UserDocumentTable";
 import AddDocument from "../AddDocument/AddDocument";
+import AddVehicle from "../AddVehicle/AddVehicle";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
@@ -9,7 +19,8 @@ const UserDocument = ({ vehicle }) => {
   const [documents, setDocuments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
-
+  const [selectedDocument, setSelectedDocument] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchDocuments = async () => {
     const res = await fetch(
@@ -67,7 +78,34 @@ const UserDocument = ({ vehicle }) => {
       console.error("Delete error:", err);
     }
   };
-  
+
+  const handleDeleteVehicle = async () => {
+    try {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this vehicle?"
+      );
+      if (!confirmed) return;
+
+      const res = await fetch(
+        `http://localhost:3000/api/vehicles/${vehicle._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete vehicle");
+
+      console.log("Vehicle deleted");
+      window.location.reload();
+    } catch (err) {
+      console.error("Delete vehicle error:", err);
+    }
+  };
+
+  const handleEdit = (doc) => {
+    setSelectedDocument(doc);
+    onOpen();
+  };
 
   return (
     <>
@@ -96,7 +134,7 @@ const UserDocument = ({ vehicle }) => {
                 Edit Vehicle
               </MenuItem>
 
-              <MenuItem onClick={() => console.log("Delete vehicle")}>
+              <MenuItem onClick={handleDeleteVehicle} color="red.500">
                 Delete Vehicle
               </MenuItem>
             </MenuList>
@@ -137,6 +175,7 @@ const UserDocument = ({ vehicle }) => {
 
         <UserDocumentTable
           documents={documents}
+          onEdit={handleEdit}
           onDelete={handleDeleteDocument}
         />
 
@@ -147,13 +186,73 @@ const UserDocument = ({ vehicle }) => {
         </Flex>
 
         <AddDocument
+          isOpen={isModalOpen || isOpen} // support both add and edit
+          onClose={() => {
+            setIsModalOpen(false);
+            onClose(); // close chakra modal
+            setSelectedDocument(null); // reset editing doc
+          }}
+          vehicleId={vehicle._id}
+          initialData={selectedDocument} // pass doc if editing
+          onSave={async (formData) => {
+            if (selectedDocument) {
+              // EDIT MODE
+              try {
+                const res = await fetch(
+                  `http://localhost:3000/api/documents/${vehicle._id}/${selectedDocument._id}`,
+                  {
+                    method: "PUT",
+                    body: formData,
+                  }
+                );
+
+                if (!res.ok) throw new Error("Failed to update document");
+
+                console.log("Document updated");
+                await fetchDocuments(); // refresh list
+                onClose();
+                setSelectedDocument(null);
+              } catch (err) {
+                console.error(err);
+              }
+            } else {
+              // ADD MODE
+              handleSaveDocument(formData);
+            }
+          }}
+        />
+
+        <AddVehicle
           isOpen={isEditOpen}
           onClose={() => setIsEditOpen(false)}
           vehicle={vehicle}
-          onSave={(updatedVehicle) => {
-            console.log("Updated vehicle:", updatedVehicle);
-            // TODO: Call PUT or PATCH API here
-            setIsEditOpen(false);
+          onSave={async (updatedVehicleData) => {
+            try {
+              const res = await fetch(
+                `http://localhost:3000/api/vehicles/${vehicle._id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(updatedVehicleData),
+                }
+              );
+
+              if (!res.ok) {
+                const text = await res.text();
+                throw new Error(`Failed to update vehicle: ${text}`);
+              }
+
+              const updated = await res.json();
+              console.log("Vehicle updated:", updated);
+
+              // Optionally update UI state here if needed
+
+              setIsEditOpen(false);
+            } catch (err) {
+              console.error(err);
+            }
           }}
         />
       </Flex>

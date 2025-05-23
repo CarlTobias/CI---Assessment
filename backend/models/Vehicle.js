@@ -6,6 +6,7 @@ const documentSchema = new mongoose.Schema({
   expiryDate: Date,
   filePath: String,
   cloudinaryPublicId: String,
+  originalFileName: String,
 });
 
 const vehicleSchema = new mongoose.Schema({
