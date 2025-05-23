@@ -9,9 +9,9 @@ const ForumOnline = () => {
       <Flex flexDirection={"column"} gap={5} justify={"center"}>
         <Box
           w={"100%"}
-          fontWeight={600}
-          fontSize={{ base: "4xl", md: "2xl", lg: 28, xl: "4xl" }}
-          color={"#000"}
+          fontSize={{ base: "2xl", md: "xl", lg: '2xl', xl: "2xl" }}
+          color={"#ffffff"}
+          fontWeight={500}
         >
           Online Forum
         </Box>
@@ -22,19 +22,22 @@ const ForumOnline = () => {
             align="center"
             gap={2}
             w="100%"
-            p={5}
-            borderRadius={5}
-            boxShadow="2xl"
-            border="0.5px solid #000"
+            p={6}
+            borderRadius={100}
+            boxShadow="0 4px 7px rgba(0, 0, 0, 0.3)"
+            backgroundColor={"#FFFFFF"}
             cursor="pointer"
+            
             onClick={onOpen}
           >
-            <Avatar size="lg" />
+            <Avatar size="md" />
             <Input
               border="0px"
+              borderRadius={50}
               placeholder="What's on your mind?"
+              backgroundColor={"#E5E5E5"}
               pointerEvents="none"
-              _placeholder={{ color: "gray.500" }}
+              _placeholder={{ color: "gray.600" }}
             />
           </Flex>
 

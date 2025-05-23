@@ -62,7 +62,7 @@ const AddForumPost = ({ isOpen, onClose }) => {
   return (
     <Modal
       isCentered
-      size="3xl"
+      size="2xl"
       isOpen={isOpen}
       onClose={() => {
         resetForm();
@@ -72,17 +72,17 @@ const AddForumPost = ({ isOpen, onClose }) => {
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton color="#000" />
-        <ModalBody p={5} backgroundColor="#FFF" borderRadius={5}>
+        <ModalBody p={5} backgroundColor="#FFF" borderRadius={8}>
           <Flex
             flexDirection={"column"}
-            gap={5}
+            gap={10}
             px={5}
             py={4}
             display={{ base: "none", md: "flex" }}
           >
             <FormControl>
               <FormLabel color="#000" fontWeight={700} fontSize={28}>What's on your mind?</FormLabel>
-              <Flex flexDirection={"column"} gap={5}>
+              <Flex flexDirection={"column"} gap={4}>
                 {/* Restyle pls */}
                 <Input
                   type="text"
@@ -97,9 +97,14 @@ const AddForumPost = ({ isOpen, onClose }) => {
 
                 <Input
                   type="text"
+                  as="textarea"
                   value={userPost}
                   backgroundColor="#292929"
                   color="#FFF"
+                  py={2}
+                  height="50vh"
+                  textAlign="left"
+                  verticalAlign="top"
                   placeholder="Share something with the community..."
                   _placeholder={{ color: "#FFFFFF99" }}
                   onChange={(e) => setUserPost(e.target.value)}
