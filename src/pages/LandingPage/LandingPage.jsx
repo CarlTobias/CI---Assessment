@@ -1,7 +1,6 @@
 import "../../index.css";
-import BackgroundBeams from "../../components/BackgroundBeams";
 import Typewriter from "../../components/Typewriter";
-import AnimatedInfoCard from "../../components/AnimatedInfoCard";
+import FeatureSection from "../../components/FeatureSection";
 
 
 import {
@@ -20,7 +19,6 @@ import InfiniteScrollText from "../../components/InfiniteScrollText";
 
 
 
-
 const LandingPage = () => {
   return (
     <>
@@ -28,161 +26,75 @@ const LandingPage = () => {
       <Flex
           w={"100vw"}
           h={"100vh"}
-          backgroundImage={"url('/images/landingBackground.png')"}
+          backgroundImage={"url('/images/car_bg.gif')"}
           backgroundSize={"cover"}
           backgroundPosition={"center"}
           flexDirection={"column"}
           className={"animated-landing"} 
         >
     <LandingBar />
-    <Container
-      maxW={"100%"}
-      h={"100%"}
-      display={"flex"}
-      alignItems={"center"}
-      pt={{ base: "1rem", md: "7rem", lg: "2rem" }}
-    >
-      <Flex
-        w={{ base: "90vw", md: "50vw" }}
-        flexDirection={"column"}
-        gap={5}
-      >
-    <Box px={{ base: "1rem", md: "5rem" }}>
-      <Text
-        fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
-        textAlign={{ base: "center", md: "left" }}
-        fontWeight={550}
-        className="swoosh-text"
-        whiteSpace="pre-line"
-      >
-        {`Stay on Track\nStay on the Road`}
-      </Text>
-    </Box>
-        
-        <Typewriter
-          text="Our platform is a comprehensive tool designed to help car owners and enthusiasts effortlessly manage vehicle maintenance while building a community around."
-          fontSize={{ base: "md", md: "lg", lg: "xl" }}
-          delay={25}
-          textAlign={{ base: "center", md: "left" }}
-          px={{ base: "1rem", md: "5rem" }}
-          fontWeight={600}
-          whiteSpace={"pre-line"}
-          color={"#FFF"}
-        />
-        
-      </Flex>
-    </Container>
+<Container
+  maxW="100%"
+  h="100vh"
+  display="flex"
+  alignItems="center"
+  justifyContent="center"
+  pt={{ base: "1rem", md: "7rem", lg: "2rem" }}
+  position="relative"
+  role="group" // enables _groupHover targeting
+>
+  {/* Fade-in Text Positioned Upper-Center */}
+  <Box
+    position="absolute"
+    top="25%" // upper part of the center
+    left="50%"
+    transform="translate(-50%, -50%)"
+    opacity={0}
+    transition="opacity 0.8s ease-in-out"
+    _groupHover={{ opacity: 1 }}
+    px={{ base: "1rem", md: "5rem" }}
+  >
+<Text
+  fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}
+  textAlign="center"
+  fontWeight={550}
+  className="flicker"
+  color="white"
+  whiteSpace="nowrap"
+  overflow="visible"
+  textOverflow="unset"
+  mb={20}
+>
+  Stay on Track, Stay on the Road
+</Text>
+
+  </Box>
+
+  {/* Main Flex Content */}
+  <Flex
+    w={{ base: "90vw", md: "50vw" }}
+    flexDirection="column"
+    gap={50}
+    zIndex={7}
+  >
+    <Typewriter
+      text={"Take control of your car's upkeep and connect with fellow enthusiasts — our all-in-one platform makes vehicle maintenance simple, smart, and social."}
+      fontSize={{ base: "md", md: "lg", lg: "xl" }}
+      delay={25}
+      textAlign={{ base: "center", md: "center" }}
+      px={{ base: "1rem", md: "5rem" }}
+      fontWeight={400}
+      whiteSpace="pre-line"
+      color="#FFF"
+      mt={180}
+    />
+  </Flex>
+</Container>
+
 </Flex>
 
-        <Flex w={"100vw"} h={"100vh"} align={"center"} flexDirection={"column"}>
-          <Box
-            display={"flex"}
-            justifyContent={"space-around"}
-            alignItems={"flex-start"}
-            w={"100vw"}
-            p={0}
-            m={0}
-          >
-            <Text pt={"4rem"} fontWeight={700} fontSize={50} color={"#000"}>
-              About Us
-            </Text>
-            <Text
-              align={"right"}
-              w={"45vw"}
-              pt={"4rem"}
-              fontWeight={600}
-              fontSize={25}
-              color={"#000"}
-            >
-              Our platform is a comprehensive tool designed to help car owners
-              and enthusiasts effortlessly manage vehicle maintenance while
-              building a community around.
-            </Text>
-          </Box>
-
-          <Box display={"flex"} flex={1} alignItems={"center"}>
-            <Box
-              backdropFilter="blur(18px)"
-              backgroundColor="rgba(217, 217, 217, 0.6)"
-              h={"300px"}
-              w={"300px"}
-              mt={-300}
-              mr={-150}
-              zIndex={1}
-              borderRadius={18}
-              p={"2rem"}
-            >
-              <Box
-                mb="1rem"
-                color="white"
-                backgroundColor="#000000"
-                p="0.5rem"
-                borderRadius="16"
-                display="inline-block"
-              >
-                <MdBuild size="40px" />
-              </Box>
-              <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
-                Easy to Apply
-              </Text>
-
-              <Text fontSize="sm">
-                Manage vehicle maintenance easily and efficiently with our
-                streamlined platform.
-              </Text>
-            </Box>
-
-            <Image src="/images/car.png" alt="car.png" h={"80%"} />
-
-            <Box
-              backdropFilter="blur(18px)"
-              backgroundColor="rgba(217, 217, 217, 0.6)"
-              h={"300px"}
-              w={"300px"}
-              mb={-200}
-              ml={-150}
-              zIndex={1}
-              borderRadius={18}
-              p={"2rem"}
-            >
-              <Box
-                mb="1rem"
-                color="white"
-                backgroundColor="#90030C"
-                p="0.5rem"
-                borderRadius="16"
-                display="inline-block"
-              >
-                <MdBuild size="40px" />
-              </Box>
-
-              <Text fontSize="xl" fontWeight="bold" mb="0.5rem">
-                Easy to Apply
-              </Text>
-
-              <Text fontSize="sm">
-                Manage vehicle maintenance easily and efficiently with our
-                streamlined platform.
-              </Text>
-  
-            </Box>
-          </Box>
-        </Flex>
-      </Flex>
-
-      <Text
-        className={"aboutSubtitle"}
-        align={"left"}
-        w={"45vw"}
-        fontSize={25}
-        pt={"4rem"}
-        ml={"10rem"}
-        mb={"10rem"}
-      >
-        Our platform is a comprehensive tool designed to help car owners and
-        enthusiasts effortlessly manage vehicle maintenance while building a
-        community around.
-      </Text>
+  <FeatureSection/>
+  </Flex>
 
       {/* Video Section */}
       <Box w="100vw" h="auto" position="relative" mt={"2rem"}>

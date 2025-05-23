@@ -72,3 +72,90 @@ Input {
 .animated-landing {
   animation: backgroundZoomPan 30s linear;
 }
+
+@keyframes headlightSweep {
+  0% {
+    left: -75%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.swoosh-text {
+  position: relative;
+  color: white;
+  font-weight: bold;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px #ff0000,
+    0 0 20px #ff0000,
+    0 0 30px #ff0000;
+}
+
+.swoosh-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 0, 0, 0) 30%,
+    rgba(255, 0, 0, 0.6) 50%,
+    rgba(255, 0, 0, 0) 70%
+  );
+  animation: headlightSweep 2.5s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #90030C,
+      0 0 19px #90030C,
+      0 0 40px #90030C,
+      0 0 80px #90030C;
+  }
+
+  20%, 24%, 55% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+.flicker {
+  animation: flicker 5s infinite;
+  color: white;
+  font-weight: bold;
+  white-space: pre-line;
+}
+
+.feature-box {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: scale(1.05);
+}
+
+.feature-icon {
+  display: inline-block;
+  padding: 20px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.feature-icon:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
