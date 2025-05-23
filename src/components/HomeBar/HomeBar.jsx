@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import authStore from "../../stores/authStore";
@@ -60,7 +58,6 @@ const HomeBar = () => {
           </Link>
 
           <Link
-            className={"homeLink"}
             to={"/home?mode=forum"}
             as={RouterLink}
             px={{ base: "1rem", md: "2rem" }}
@@ -74,6 +71,22 @@ const HomeBar = () => {
             _hover={{ backgroundColor: "#000", color: "#FFF" }}
           >
             <Text>Forum</Text>
+          </Link>
+
+          <Link
+            to={"/home?mode=garages"}
+            as={RouterLink}
+            px={{ base: "1rem", md: "2rem" }}
+            py={"0.5rem"}
+            border={"2px solid black"}
+            borderRadius={10}
+            fontWeight={600}
+            fontSize={{ base: 12, md: 14, lg: 16 }}
+            color={currentMode === "garages" ? "#FFF" : "#000"}
+            backgroundColor={currentMode === "garages" ? "#000" : "transparent"}
+            _hover={{ backgroundColor: "#000", color: "#FFF" }}
+          >
+            <Text>Garages</Text>
           </Link>
         </Flex>
 
