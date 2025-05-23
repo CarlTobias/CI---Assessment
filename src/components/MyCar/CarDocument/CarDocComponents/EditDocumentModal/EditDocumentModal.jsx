@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
   ModalBody, ModalCloseButton, Button, FormControl, FormLabel,
@@ -18,7 +18,7 @@ const EditDocumentModal = ({ isOpen, onClose, onSubmit, vehicleId, initialData }
       setDocumentName(initialData.name || '');
       setIssueDate(initialData.issueDate ? new Date(initialData.issueDate) : null);
       setExpiryDate(initialData.expiryDate ? new Date(initialData.expiryDate) : null);
-      setFile(null); // default to no change
+      setFile(null);
     }
   }, [initialData]);
 

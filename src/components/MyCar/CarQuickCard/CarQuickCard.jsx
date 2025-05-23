@@ -1,4 +1,3 @@
-// components/CarQuickCard.js
 import {
   Box,
   Badge,
@@ -9,104 +8,174 @@ import {
   Button,
   VStack,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
+import { useRef, useState } from "react";
 
 const StatusDot = ({ color }) => (
-  <Box
-    w="10px"
-    h="10px"
-    borderRadius="full"
-    bg={color}
-    mr={2}
-  />
+  <Box w="10px" h="10px" borderRadius="full" bg={color} mr={2} />
 );
 
-const CarQuickCard = () => {
+const CarQuickCard = ({ vehicle }) => {
+  const [insuranceFile, setInsuranceFile] = useState(null);
+  const [registrationFile, setRegistrationFile] = useState(
+    new Blob(["Car registration document"], { type: "text/plain" })
+  );
+  const [licenseFile, setLicenseFile] = useState(
+    new Blob(["License renewal document"], { type: "text/plain" })
+  );
+
+  const insuranceInputRef = useRef(null);
+  const toast = useToast();
+
+  const handleInsuranceChange = (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      setInsuranceFile(selected);
+      toast({
+        title: "File uploaded",
+        description: `${selected.name}`,
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const triggerInsuranceUpload = () => {
+    if (insuranceInputRef.current) {
+      insuranceInputRef.current.click();
+    }
+  };
+
+  const handleDownload = (file, label) => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${label}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Download started",
+        description: `${label}.txt`,
+        status: "info",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "No file to download",
+        description: `Please upload a file for ${label}`,
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
+
+  if (!vehicle) return null;
+
   return (
     <Box
       borderLeft="4px solid"
       borderColor="red.300"
       borderRadius="lg"
       overflow="hidden"
-      fontFamily='Poppins'
+      fontFamily="Poppins"
       p={4}
       bg="white"
       shadow="md"
       maxW="sm"
     >
+      {/* Header */}
       <Flex justify="space-between" align="center">
         <Box>
           <Text fontSize="lg" fontWeight="bold">
-            Nissan Altima
-          </Text>
-          <HStack spacing={2} mt={1}>
-            <Badge colorScheme="red" borderRadius="full" px={2}>
-              1
-            </Badge>
-            <Badge colorScheme="red" borderRadius="full" px={2}>
-              Document Pending
-            </Badge>
-          </HStack>
-          <Text mt={1} fontSize="sm" color="gray.600">
-            Owner - Raven Baylon
+            {vehicle.make} {vehicle.model}
           </Text>
         </Box>
-        <IconButton variant="ghost" icon={<DownloadIcon />} aria-label="Options" />
       </Flex>
 
       <Divider my={4} />
 
+      {/* Mileage and Year */}
       <Flex justify="space-between">
         <VStack align="start">
-          <Text fontSize="sm" color="gray.500">Milage</Text>
-          <Text fontWeight="bold">222,000 km</Text>
+          <Text fontSize="sm" color="gray.500">
+            Mileage
+          </Text>
+          <Text fontWeight="bold">{vehicle.mileage || "N/A"} km</Text>
         </VStack>
         <VStack align="start">
-          <Text fontSize="sm" color="gray.500">Model</Text>
-          <Text fontWeight="bold">2012</Text>
+          <Text fontSize="sm" color="gray.500">
+            Year
+          </Text>
+          <Text fontWeight="bold">{vehicle.year || "N/A"}</Text>
         </VStack>
       </Flex>
 
       <Divider my={4} />
 
+      {/* Document Rows */}
       <VStack align="start" spacing={3}>
+        {/* Car Registration */}
         <Flex justify="space-between" w="100%" align="center">
           <HStack>
             <StatusDot color="green.400" />
             <Text>Car Registration</Text>
           </HStack>
           <HStack>
-            <Text fontSize="sm" color="gray.500">
-              10|24|2024 - 10|23|2025
-            </Text>
-             <IconButton variant="ghost" icon={<DownloadIcon />} aria-label="Options" />
+            <IconButton
+              variant="ghost"
+              icon={<DownloadIcon />}
+              aria-label="Download"
+              onClick={() =>
+                handleDownload(registrationFile, "CarRegistration")
+              }
+            />
           </HStack>
         </Flex>
 
+        {/* Insurance Expiry*/}
         <Flex justify="space-between" w="100%" align="center">
           <HStack>
-            <StatusDot color="red.400" />
+            <StatusDot color="green.400" />
             <Text>Insurance Expiry</Text>
           </HStack>
-          <Button size="xs" colorScheme="blue">
-            Upload File
-          </Button>
+          <HStack>
+            <IconButton
+              variant="ghost"
+              icon={<DownloadIcon />}
+              aria-label="Download"
+              onClick={() => handleDownload(licenseFile, "LicenseRenewal")}
+            />
+          </HStack>
         </Flex>
 
+        {/* License Renewal */}
         <Flex justify="space-between" w="100%" align="center">
           <HStack>
-            <StatusDot color="red.400" />
+            <StatusDot color="green.400" />
             <Text>License Renewal</Text>
           </HStack>
           <HStack>
-            <Text fontSize="sm" color="gray.500">
-              10|24|2024 - 10|23|2025
-            </Text>
-             <IconButton variant="ghost" icon={<DownloadIcon />} aria-label="Options" />
+            <IconButton
+              variant="ghost"
+              icon={<DownloadIcon />}
+              aria-label="Download"
+              onClick={() => handleDownload(licenseFile, "LicenseRenewal")}
+            />
           </HStack>
         </Flex>
       </VStack>
+      <Button px="3vw" m={1}>
+        Open Document
+      </Button>
     </Box>
   );
 };

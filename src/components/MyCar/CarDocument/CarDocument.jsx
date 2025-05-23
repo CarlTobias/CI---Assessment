@@ -1,174 +1,207 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Badge,
-  Text,
-  Flex,
-  IconButton,
-  Divider,
-  Button,
-  HStack,
-  VStack,
-  Input,
-} from "@chakra-ui/react";
-import { DownloadIcon } from "@chakra-ui/icons";
-import { FiMoreVertical } from "react-icons/fi";
-import { FaCircle } from "react-icons/fa";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { Box, useToast } from "@chakra-ui/react";
+import VehicleDetails from "./CarDocComponents/VehicleDetails";
+import DocumentList from "./CarDocComponents/DocumentList";
+import AddDocumentModal from "./CarDocComponents/AddDocumentModal/AddDocumentModal";
+import EditDocumentModal from "./CarDocComponents/EditDocumentModal/EditDocumentModal";
+import EditVehicleModal from "./EditVehicleModal/EditVehicleModal";
 
-// STATUS DOT
-const StatusDot = ({ color }) => (
-  <Box as={FaCircle} color={color} boxSize={2} mr={2} />
-);
+const CarDocument = ({
+  vehicle,
+  onDeleteVehicle,
+  onSubmit,
+  onViewDocuments,
+}) => {
+  const [documents, setDocuments] = useState(vehicle.documents || []);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingDocument, setEditingDocument] = useState(null);
+  const [currentVehicle, setCurrentVehicle] = useState(vehicle);
+  const [isEditVehicleModalOpen, setIsEditVehicleModalOpen] = useState(false);
+  const toast = useToast();
 
-// ROW COMPONENT
-const DocumentRow = ({ label, statusColor, oldDate, newDate }) => {
-  const [startDate, setStartDate] = useState(new Date(oldDate));
-  const [endDate, setEndDate] = useState(new Date(newDate));
+  const handleDeleteDocument = async (docId) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/vehicles/${currentVehicle._id}/documents/${docId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!res.ok) throw new Error("Failed to delete document");
 
-  return (
-    <Flex
-      align="center"
-      justify="space-between"
-      w="100%"
-      py={2}
-      borderBottom="1px solid"
-      borderColor="gray.200"
-      flexWrap="wrap"
-    >
-      <Flex align="center" w="20%">
-        <StatusDot color={statusColor} />
-        <Text>{label}</Text>
-      </Flex>
+      setDocuments((prev) => prev.filter((doc) => doc._id !== docId));
+      toast({
+        title: "Document deleted",
+        status: "info",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        title: "Error deleting document",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
 
-      <Flex align="center" w="25%">
-        <Text fontSize="sm" color="gray.500" mr={2}>
-          Issue Date
-        </Text>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          dateFormat="MMMM d, yyyy"
-          className="chakra-input css-1c6xjby"
-        />
-      </Flex>
+  const handleSubmitDocument = async (formData) => {
+    const isEdit = formData.get("_id");
+    const url = isEdit
+      ? `/api/vehicles/${currentVehicle._id}/documents/${formData.get("_id")}`
+      : `/api/vehicles/${currentVehicle._id}/documents`;
 
-      <Flex align="center" w="25%">
-        <Text fontSize="sm" color="gray.500" mr={2}>
-          New Expiry
-        </Text>
-        <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          dateFormat="MMMM d, yyyy"
-          className="chakra-input css-1c6xjby"
-        />
-      </Flex>
+    const method = isEdit ? "PATCH" : "POST";
 
-      <Button colorScheme="blue" size="sm" mr={2}>
-        Upload New File
-      </Button>
+    try {
+      const res = await fetch(url, {
+        method,
+        body: formData,
+      });
 
-      <IconButton
-        icon={<DownloadIcon />}
-        size="sm"
-        variant="ghost"
-        aria-label="Download"
-      />
-    </Flex>
-  );
-};
+      if (!res.ok) throw new Error("Failed to save document");
 
-// MAIN CARD
-const EditableCarCard = () => {
+      const updatedVehicle = await res.json();
+      setDocuments(updatedVehicle.documents || []);
+
+      toast({
+        title: isEdit ? "Document updated" : "Document added",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        title: "Error saving document",
+        description: err.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setEditingDocument(null);
+      setIsAddModalOpen(false);
+      setIsEditModalOpen(false);
+    }
+  };
+
+  const handleEditDocument = (doc) => {
+    setEditingDocument(doc);
+    setIsEditModalOpen(true);
+  };
+
+  const handleAddDocument = () => {
+    setEditingDocument(null);
+    setIsAddModalOpen(true);
+  };
+
+  const handleSubmitEditVehicle = async (updatedData) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5000/vehicles/${currentVehicle._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to update vehicle");
+
+      const updatedVehicle = await res.json();
+
+      setCurrentVehicle(updatedVehicle); // ✅ UPDATE vehicle state here
+
+      toast({
+        title: "Vehicle updated",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      setIsEditVehicleModalOpen(false);
+    } catch (err) {
+      toast({
+        title: "Error updating vehicle",
+        description: err.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleEditVehicle = () => {
+    setIsEditVehicleModalOpen(true);
+  };
+
+  const handleCloseEditVehicle = () => {
+    setIsEditVehicleModalOpen(false);
+  };
+
+  const handleViewDocuments = (vehicleId) => {
+    console.log("View documents for:", vehicleId);
+    // Navigate or show documents here
+  };
+
   return (
     <Box
-      borderLeft="4px solid"
-      borderColor="red.300"
+      border="1px solid #e53e3e"
       borderRadius="lg"
-      overflow="hidden"
-      bg="white"
       p={4}
-      fontFamily='Poppins'
+      mb={6}
+      position="relative"
     >
-      {/* Header */}
-      <Flex
-        justify="space-between"
-        align="center"
-        bg="gray.50"
-        p={3}
-        borderRadius="md"
-      >
-        <Box>
-          <Text fontWeight="bold" fontSize="lg">
-            Nissan Altima
-          </Text>
-          <HStack mt={1}>
-            <Badge colorScheme="red" borderRadius="full" px={2}>
-              2
-            </Badge>
-            <Badge colorScheme="red" borderRadius="full" px={2}>
-              Document Pending
-            </Badge>
-          </HStack>
-        </Box>
-        <IconButton icon={<FiMoreVertical />} variant="ghost" aria-label="Options" />
-      </Flex>
+      {/* Vehicle Info */}
+      <VehicleDetails
+        vehicle={currentVehicle}
+        onDeleteVehicle={() => onDeleteVehicle(currentVehicle._id)}
+        onEditVehicle={handleEditVehicle}
+        onViewDocuments={() => handleViewDocuments(currentVehicle._id)}
+      />
 
-      {/* Info Inputs */}
-      <Flex mt={4} gap={4} flexWrap="wrap">
-        <Box flex="1">
-          <Text fontSize="sm"  mb={1}>
-            Brand
-          </Text>
-          <Input fontWeight="bold" placeholder="i.e. Nissan, Toyota, Honda, etc." />
-        </Box>
-        <Box flex="1">
-          <Text fontSize="sm" fontWeight={"bold"} mb={1}>
-            Model
-          </Text>
-          <Input fontWeight="bold" placeholder="i.e. Altima, Camry, Civic, etc." />
-        </Box>
-        <Box flex="1">
-          <Text fontSize="sm" mb={1}>
-            Year
-          </Text>
-          <Input fontWeight="bold" placeholder="Car Year" />
-        </Box>
-        <Box flex="1">
-          <Text fontSize="sm" mb={1}>
-            Milage
-          </Text>
-          <Input fontWeight="bold" placeholder="Current Car Milage" />
-        </Box>
-      </Flex>
+      {/* Document Table */}
+      <DocumentList
+        documents={documents}
+        onEdit={handleEditDocument}
+        onDelete={handleDeleteDocument}
+        onAddDocument={handleAddDocument}
+      />
 
-      <Divider my={4} />
+      {/* Add Modal */}
+      <AddDocumentModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onEditVehicle={handleEditVehicle}
+        vehicleId={currentVehicle._id}
+        onSubmit={handleSubmitDocument}
+      />
 
-      {/* Document Rows */}
-      <VStack spacing={0} align="stretch">
-        <DocumentRow
-          label="Car Registration"
-          statusColor="green.400"
-          oldDate="October 24, 2024"
-          newDate="October 25, 2025"
-        />
-        <DocumentRow
-          label="Insurance Expiry"
-          statusColor="red.400"
-          oldDate="October 24, 2024"
-          newDate="October 25, 2025"
-        />
-        <DocumentRow
-          label="License Renewal"
-          statusColor="red.400"
-          oldDate="October 24, 2024"
-          newDate="October 25, 2025"
-        />
-      </VStack>
+      {/* Edit Modal */}
+      <EditDocumentModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingDocument(null);
+        }}
+        onSubmit={handleSubmitDocument}
+        vehicleId={currentVehicle._id}
+        initialData={editingDocument}
+      />
+
+      {/* Edit Vehicle Modal */}
+      <EditVehicleModal
+        isOpen={isEditVehicleModalOpen}
+        onClose={handleCloseEditVehicle}
+        onSubmit={handleSubmitEditVehicle}
+        vehicle={currentVehicle}
+      />
     </Box>
   );
 };
 
-export default EditableCarCard;
+export default CarDocument;

@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { FiMoreVertical } from 'react-icons/fi';
 
+
 const VehicleDetails = ({ vehicle, onDeleteVehicle, onEditVehicle, onViewDocuments }) => {
   return (
     <>
