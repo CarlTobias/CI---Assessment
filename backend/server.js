@@ -28,70 +28,82 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Successfully connected to MongoDB"))
-  .catch((err) => console.error("Error connecting to MongoDB:", err));
+  .then(() => {
+    console.log("✅ Successfully connected to MongoDB");
 
-// Register
-app.post("/api/register", async (req, res) => {
-  const { username, email, password } = req.body;
+    // Middleware
+    app.use(express.json());
+    app.use(
+      cors({
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+      })
+    );
 
-  const existingAccount = await User.findOne({ email });
-  if (existingAccount) {
-    return res
-      .status(400)
-      .json({ error: "User already exists with this email." });
-  }
+    // Routes
+    app.post("/api/register", async (req, res) => {
+      const { username, email, password } = req.body;
 
-  const hashedPass = await bcrypt.hash(password, 15);
+      const existingAccount = await User.findOne({ email });
+      if (existingAccount) {
+        return res
+          .status(400)
+          .json({ error: "User already exists with this email." });
+      }
 
-  try {
-    const newAccount = new User({
-      username,
-      email,
-      password: hashedPass,
+      const hashedPass = await bcrypt.hash(password, 15);
+
+      try {
+        const newAccount = new User({
+          username,
+          email,
+          password: hashedPass,
+        });
+        await newAccount.save();
+        res
+          .status(200)
+          .json({ message: "New Account Registered Successfully" });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Account Registration failed" });
+      }
     });
-    await newAccount.save();
-    res.status(200).json({ message: "New Account Registered Successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Account Registration failed" });
-  }
-});
 
-// Login
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
+    app.post("/api/login", async (req, res) => {
+      const { email, password } = req.body;
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ error: "User Not Found." });
+      try {
+        const user = await User.findOne({ email });
+        if (!user) return res.status(400).json({ error: "User Not Found." });
 
-    const isPasswordsMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordsMatch)
-      return res.status(400).json({ error: "Incorrect Password." });
+        const isPasswordsMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordsMatch)
+          return res.status(400).json({ error: "Incorrect Password." });
 
-    res.status(200).json({
-      message: "Login successful",
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        profilePic: user.profilePic,
-      },
+        res.status(200).json({
+          message: "Login successful",
+          user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            profilePic: user.profilePic,
+          },
+        });
+      } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ error: "Login Failed" });
+      }
     });
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Login Failed" });
-  }
-});
 
-// Posting on the Forum
-app.use("/api/posts", postRoutes);
+    // Posting on the Forum
+    app.use("/api/posts", postRoutes);
+
+    // Start the server only after DB connection
+    app.listen(3000, () => {
+      console.log("🚀 Server running on http://localhost:3000");
+    });
+  })
+  .catch((err) => console.error("❌ Error connecting to MongoDB:", err));
 
 // My Car
-
-
-
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
