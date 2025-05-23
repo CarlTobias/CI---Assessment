@@ -19,15 +19,13 @@ const ForumPost = ({ post }) => {
         flexDirection={"column"}
         gap={5}
         mb={5}
-        p={5}
-        borderRadius={5}
-        boxShadow={"xl"}
-        backgroundColor={"#F5F5F5"}
-        border={"0.5px solid #000"}
+        p={10}
+        borderRadius={20}
+        boxShadow="0 4px 7px rgba(0, 0, 0, 0.3)"
+        backgroundColor={"#FFFFFF"}
+        // border={"0.5px solid #000"}
       >
-        <Box fontWeight={700} fontSize={32}>
-          {post.title}
-        </Box>
+        
         <Flex w={"100%"} flexDirection={"column"} gap={2}>
           <Flex gap={3}>
             <Avatar
@@ -38,7 +36,7 @@ const ForumPost = ({ post }) => {
               <Box fontWeight={500} fontSize={{ base: "md", md: "lg" }}>
                 {post.author?.username}
               </Box>
-              <Box fontWeight={300} fontSize={"sm"}>
+              <Box fontWeight={400} textColor={"blackAlpha.700"} fontSize={"sm"}>
                 {new Date(post.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -48,7 +46,10 @@ const ForumPost = ({ post }) => {
             </Flex>
           </Flex>
 
-          <Text w={"100%"} fontWeight={400} fontSize={{ base: "md", md: "lg" }}>
+        <Box fontWeight={500} fontSize={25}>
+          {post.title}
+        </Box>
+          <Text w={"100%"} fontWeight={400} textColor={"blackAlpha.700"} fontSize={{ base: "md", md: "lg" }}>
             {post.content}
           </Text>
         </Flex>

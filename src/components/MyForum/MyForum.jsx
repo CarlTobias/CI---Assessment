@@ -1,6 +1,5 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 
-import ForumNearMe from "./ForumNearMe/ForumNearMe";
 import ForumOnline from "./ForumOnline/ForumOnline";
 
 const MyForum = () => {
@@ -11,13 +10,12 @@ const MyForum = () => {
           gap={10}
           flexDirection={"row"}
           justify={"space-around"}
+          bg='#292929'
+          borderRadius={10}
+          margin={5}
+          p={10}
         >
-          <Box display={{ base: "none", md: "block" }} flex={1}>
-            <ForumNearMe />
-          </Box>
-
-          {/* Make only ForumOnline Scrollable */}
-          <Box justify={"center"} w={"100%"} flex={3}>
+          <Box justify={"center"} w={"100%"}>
             <ForumOnline />
           </Box>
         </Flex>

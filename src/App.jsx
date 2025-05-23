@@ -6,7 +6,6 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import HomePage from "./pages/HomePage/HomePage";
 
-
 function App() {
   return (
     <>
@@ -14,9 +13,7 @@ function App() {
         <Route path="/" element={<Navigate to="/landing" replace />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
-        {/* <Route path="/home" element={<HomePage />} /> */}
 
-        {/* Uncomment for final */}
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<HomePage />} />
         </Route>
