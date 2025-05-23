@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import HomeBar from "../../components/HomeBar/HomeBar";
 import MyCar from "../../components/MyCar/MyCar";
 import MyForum from "../../components/MyForum/MyForum";
+import MyGarages from "../../components/MyGarages/MyGarages";
 
 const HomePage = () => {
   const useQuery = () => {
@@ -21,7 +22,9 @@ const HomePage = () => {
       <Flex minH={"100vh"} flexDirection={"column"}>
         <HomeBar />
 
-        {mode === "forum" ? <MyForum /> : <MyCar />}
+        {mode === "forum" && <MyForum />}
+        {mode === "mycar" && <MyCar />}
+        {(!mode || mode === "garages") && <MyGarages />}
       </Flex>
     </>
   );

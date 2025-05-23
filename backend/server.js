@@ -41,7 +41,7 @@ mongoose
       })
     );
 
-    // Routes
+    // Register
     app.post("/api/register", async (req, res) => {
       const { username, email, password } = req.body;
 
@@ -70,6 +70,7 @@ mongoose
       }
     });
 
+    // Login
     app.post("/api/login", async (req, res) => {
       const { email, password } = req.body;
 
@@ -105,5 +106,3 @@ mongoose
     });
   })
   .catch((err) => console.error("❌ Error connecting to MongoDB:", err));
-
-// My Car

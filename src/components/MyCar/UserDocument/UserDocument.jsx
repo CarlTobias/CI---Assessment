@@ -1,11 +1,27 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { IoEyeSharp } from "react-icons/io5";
+import { MdOutlineFileDownload } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const UserDocument = () => {
   return (
     <>
       <Flex
         flexDirection={"column"}
+        justify={"center"}
         align={"center"}
         gap={5}
         p={5}
@@ -27,15 +43,21 @@ const UserDocument = () => {
 
         <Flex w={"100%"} justify={"space-between"}>
           <Flex flexDirection={"column"}>
+            <Box>Type</Box>
+
+            <Box>Sedan</Box>
+          </Flex>
+
+          <Flex flexDirection={"column"}>
             <Box>Brand</Box>
 
-            <Box>Brand Placeholder</Box>
+            <Box>Honda</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Model</Box>
 
-            <Box>Model Placeholder</Box>
+            <Box>Civic</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
@@ -57,10 +79,63 @@ const UserDocument = () => {
           </Flex>
         </Flex>
 
-        {/* <Box w={"100%"} h={"1px"} backgroundColor={"gray.400"} /> */}
+        <Flex w={"100%"}>
+          <Table w={"100%"}>
+            <Thead>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Issue Date</Th>
+                <Th>Expiry Date</Th>
+                <Th>Status</Th>
+                <Th>File</Th>
+                <Th>Actions</Th>
+              </Tr>
+            </Thead>
 
-        <Flex flexDirection={"column"}>
-            <Flex></Flex>
+            <Tbody>
+              <Tr>
+                <Td>Car Registration</Td>
+                <Td>No Date</Td>
+                <Td>No Date</Td>
+                <Td>Pending</Td>
+                <Td>No File</Td>
+                <Td display={"flex"} flexDirection={"row"} gap={2}>
+                  <IoEyeSharp />
+                  <MdOutlineFileDownload />
+                  <FaRegEdit />
+                  <MdDelete />
+                </Td>
+              </Tr>
+
+              <Tr>
+                <Td>Insurance</Td>
+                <Td>No Date</Td>
+                <Td>No Date</Td>
+                <Td>Pending</Td>
+                <Td>No File</Td>
+                <Td display={"flex"} flexDirection={"row"} gap={2}>
+                  <IoEyeSharp />
+                  <MdOutlineFileDownload />
+                  <FaRegEdit />
+                  <MdDelete />
+                </Td>
+              </Tr>
+
+              <Tr>
+                <Td>License</Td>
+                <Td>No Date</Td>
+                <Td>No Date</Td>
+                <Td>Pending</Td>
+                <Td>No File</Td>
+                <Td display={"flex"} flexDirection={"row"} gap={2}>
+                  <IoEyeSharp />
+                  <MdOutlineFileDownload />
+                  <FaRegEdit />
+                  <MdDelete />
+                </Td>
+              </Tr>
+            </Tbody>
+          </Table>
         </Flex>
       </Flex>
     </>
