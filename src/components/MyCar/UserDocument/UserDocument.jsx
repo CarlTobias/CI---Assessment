@@ -1,22 +1,74 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Flex,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoEyeSharp } from "react-icons/io5";
-import { MdOutlineFileDownload } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import UserDocumentTable from "./UserDocumentTable";
+import AddDocument from "../AddDocument/AddDocument";
 
-const UserDocument = () => {
+import { BsThreeDotsVertical } from "react-icons/bs";
+
+const UserDocument = ({ vehicle }) => {
+  const [documents, setDocuments] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
+
+  const fetchDocuments = async () => {
+    const res = await fetch(
+      `http://localhost:3000/api/documents/${vehicle._id}`
+    );
+    const data = await res.json();
+    setDocuments(data);
+  };
+
+  useEffect(() => {
+    if (vehicle?._id) fetchDocuments();
+  }, [vehicle]);
+
+  const handleDocumentAdded = (newDoc) => {
+    setDocuments((prev) => [...prev, newDoc]);
+  };
+
+  const handleSaveDocument = async (formData) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/documents/${vehicle._id}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Server error: ${errorText}`);
+      }
+
+      const data = await res.json();
+      handleDocumentAdded(data);
+      await fetchDocuments();
+      console.log("Upload successful:", data);
+    } catch (err) {
+      console.error("Upload error:", err);
+    }
+  };
+
+  const handleDeleteDocument = async (docId) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/documents/${vehicle._id}/${docId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete");
+
+      setDocuments((prev) => prev.filter((doc) => doc._id !== docId));
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
+  };
+  
+
   return (
     <>
       <Flex
@@ -34,109 +86,76 @@ const UserDocument = () => {
           align={"center"}
           backgroundColor={"gray.200"}
         >
-          <Box pl={3}>Car Brand and Model Placeholder</Box>
+          <Box pl={3}>
+            {vehicle.brand} {vehicle.model}
+          </Box>
+          <Menu>
+            <MenuButton as={Button} rightIcon={<BsThreeDotsVertical />} />
+            <MenuList>
+              <MenuItem onClick={() => setIsEditOpen(true)}>
+                Edit Vehicle
+              </MenuItem>
 
-          <Button>
-            <BsThreeDotsVertical />
-          </Button>
+              <MenuItem onClick={() => console.log("Delete vehicle")}>
+                Delete Vehicle
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
 
         <Flex w={"100%"} justify={"space-between"}>
           <Flex flexDirection={"column"}>
             <Box>Type</Box>
-
-            <Box>Sedan</Box>
+            <Box>{vehicle.type}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Brand</Box>
-
-            <Box>Honda</Box>
+            <Box>{vehicle.brand}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Model</Box>
-
-            <Box>Civic</Box>
+            <Box>{vehicle.model}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Plate Number</Box>
-
-            <Box>ZZ 16313</Box>
+            <Box>{vehicle.plateNumber}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Year</Box>
-
-            <Box>2025</Box>
+            <Box>{vehicle.year}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
             <Box>Mileage</Box>
-
-            <Box>100,000 km</Box>
+            <Box>{vehicle.mileage}</Box>
           </Flex>
         </Flex>
 
-        <Flex w={"100%"}>
-          <Table w={"100%"}>
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Issue Date</Th>
-                <Th>Expiry Date</Th>
-                <Th>Status</Th>
-                <Th>File</Th>
-                <Th>Actions</Th>
-              </Tr>
-            </Thead>
+        <UserDocumentTable
+          documents={documents}
+          onDelete={handleDeleteDocument}
+        />
 
-            <Tbody>
-              <Tr>
-                <Td>Car Registration</Td>
-                <Td>No Date</Td>
-                <Td>No Date</Td>
-                <Td>Pending</Td>
-                <Td>No File</Td>
-                <Td display={"flex"} flexDirection={"row"} gap={2}>
-                  <IoEyeSharp />
-                  <MdOutlineFileDownload />
-                  <FaRegEdit />
-                  <MdDelete />
-                </Td>
-              </Tr>
-
-              <Tr>
-                <Td>Insurance</Td>
-                <Td>No Date</Td>
-                <Td>No Date</Td>
-                <Td>Pending</Td>
-                <Td>No File</Td>
-                <Td display={"flex"} flexDirection={"row"} gap={2}>
-                  <IoEyeSharp />
-                  <MdOutlineFileDownload />
-                  <FaRegEdit />
-                  <MdDelete />
-                </Td>
-              </Tr>
-
-              <Tr>
-                <Td>License</Td>
-                <Td>No Date</Td>
-                <Td>No Date</Td>
-                <Td>Pending</Td>
-                <Td>No File</Td>
-                <Td display={"flex"} flexDirection={"row"} gap={2}>
-                  <IoEyeSharp />
-                  <MdOutlineFileDownload />
-                  <FaRegEdit />
-                  <MdDelete />
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
+        <Flex>
+          <Button bg={"red"} onClick={() => setIsModalOpen(true)}>
+            Add Document
+          </Button>
         </Flex>
+
+        <AddDocument
+          isOpen={isEditOpen}
+          onClose={() => setIsEditOpen(false)}
+          vehicle={vehicle}
+          onSave={(updatedVehicle) => {
+            console.log("Updated vehicle:", updatedVehicle);
+            // TODO: Call PUT or PATCH API here
+            setIsEditOpen(false);
+          }}
+        />
       </Flex>
     </>
   );

@@ -3,12 +3,12 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-// import path from "path";
-// import { fileURLToPath } from "url";
 
 import User from "./models/User.js";
 import postRoutes from "./routes/Posts.js";
-// import vehicleRoutes from "./routes/vehicleRoutes.js";
+import vehicleRoutes from "./routes/Vehicles.js";
+import documentRoutes from "./routes/Documents.js";
+
 
 const app = express();
 
@@ -99,6 +99,16 @@ mongoose
 
     // Posting on the Forum
     app.use("/api/posts", postRoutes);
+
+
+
+    // Adding Vehicle and Document
+    app.use("/api/vehicles", vehicleRoutes);
+    app.use("/api/documents", documentRoutes);
+
+    app.use("/uploads", express.static("uploads"));
+
+    
 
     // Start the server only after DB connection
     app.listen(3000, () => {
