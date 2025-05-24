@@ -127,10 +127,28 @@ const AddVehicle = ({ isOpen, onClose, onSave, vehicle }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button mr={3} onClick={onClose}>
+          <Button mr={3} 
+          bg="#D9D9D9"
+          color="black"
+          _hover={{
+            bg: "#90030C",
+            color: "white",
+            transform: "scale(1.03)",
+          }}
+          transition="all 0.1s ease-in-out" 
+          onClick={onClose}>
             Cancel
           </Button>
-          <Button colorScheme="red" onClick={handleSubmit}>
+          <Button 
+          bg="#D9D9D9"
+          color="black"
+          _hover={{
+            bg: "#90030C",
+            color: "white",
+            transform: "scale(1.03)",
+          }}
+          transition="all 0.1s ease-in-out" 
+          onClick={handleSubmit}>
             {vehicle ? "Update" : "Save"}
           </Button>
         </ModalFooter>

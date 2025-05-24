@@ -72,26 +72,25 @@ const AddForumPost = ({ isOpen, onClose }) => {
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton color="#000" />
-        <ModalBody p={5} backgroundColor="#FFF" borderRadius={8}>
+        <ModalBody p={5} backgroundColor="#292929" borderRadius={8}>
           <Flex
             flexDirection={"column"}
             gap={10}
             px={5}
             py={4}
-            display={{ base: "none", md: "flex" }}
           >
             <FormControl>
-              <FormLabel color="#000" fontWeight={700} fontSize={28}>What's on your mind?</FormLabel>
+              <FormLabel color="#FFFFFF" fontWeight={700} fontSize={28}>What's on your mind?</FormLabel>
               <Flex flexDirection={"column"} gap={4}>
                 {/* Restyle pls */}
                 <Input
                   type="text"
                   value={postTitle}
-                  backgroundColor="#292929"
+                  backgroundColor="#FFFFFF"
                   fontWeight={600}
-                  color="#FFF"
+                  color="#292929"
                   placeholder="Title..."
-                  _placeholder={{ color: "#FFFFFF99" }}
+                  _placeholder={{ color: "#292929" }}
                   onChange={(e) => setPostTitle(e.target.value)}
                 />
 
@@ -99,8 +98,8 @@ const AddForumPost = ({ isOpen, onClose }) => {
                   type="text"
                   as="textarea"
                   value={userPost}
-                  backgroundColor="#292929"
-                  color="#FFF"
+                  backgroundColor="#FFFFFF"
+                  color="#292929"
                   py={2}
                   height="50vh"
                   textAlign="left"

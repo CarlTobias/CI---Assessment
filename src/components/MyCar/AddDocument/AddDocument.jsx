@@ -73,7 +73,16 @@ const AddDocument = ({ isOpen, onClose, onSave, initialData = null }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleSubmit} colorScheme="blue">
+          <Button 
+          bg="#D9D9D9"
+          color="black"
+          _hover={{
+            bg: "#90030C",
+            color: "white",
+            transform: "scale(1.03)",
+          }}
+          transition="all 0.1s ease-in-out"
+          onClick={handleSubmit} colorScheme="blue">
             Save
           </Button>
         </ModalFooter>

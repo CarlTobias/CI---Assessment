@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure, Container, Text } from "@chakra-ui/react";
 import UserDocuments from "./UserDocuments/UserDocuments";
 import AddVehicle from "./AddVehicle/AddVehicle";
 import authStore from "../../stores/authStore";
@@ -47,18 +47,40 @@ const MyCar = () => {
   
 
   return (
-    <>
+    <Container maxW={"100vw"}>
+      <Box
+      bg='#292929'
+      borderRadius={10}
+      margin={5}
+      p={10} fontFamily={'Poppins'}>
       <Flex flexDirection={"column"} justify={"center"} align={"center"}>
         <Flex w={"100%"} justify={"space-between"} align={"center"} px={5}>
-          <Box>Documents</Box>
-          <Button onClick={onOpen}>Add Vehicle</Button>
+          <Box 
+          w={"100%"}
+          fontSize={{ base: "2xl", md: "xl", lg: '2xl', xl: "2xl" }}
+          color={"#ffffff"}
+          fontWeight={600}
+          >
+            Documents
+          </Box>
+          <Button onClick={onOpen}
+          bg="#ffffff"
+          color="black"
+          _hover={{
+            bg: "#90030C",
+            color: "white",
+            transform: "scale(1.03)",
+          }}
+          transition="all 0.1s ease-in-out"
+          >Add Vehicle</Button>
         </Flex>
 
         <UserDocuments vehicles={vehicles} />
       </Flex>
 
       <AddVehicle isOpen={isOpen} onClose={onClose} onSave={addVehicle} />
-    </>
+      </Box>
+    </Container>
   );
 };
 
