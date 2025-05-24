@@ -1,6 +1,7 @@
 import "../../index.css";
 import Typewriter from "../../components/Typewriter";
 import FeatureSection from "../../components/FeatureSection";
+import StickyScroll from "../../components/StickyScroll";
 
 
 import {
@@ -382,6 +383,8 @@ const LandingPage = () => {
               </Box>
             ))}
           </Box>
+
+          <StickyScroll/>
 
           {/* Single Box Below */}
           <Box
