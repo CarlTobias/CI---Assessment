@@ -337,7 +337,7 @@ const MyGarages = () => {
                   whiteSpace="normal"
                   display="flex"
                   flexDirection="column"
-                  justifyContent="space-between"
+                  justifyContent="start"
                 >
                   <Heading size="md" mb={2}>
                     <Link
