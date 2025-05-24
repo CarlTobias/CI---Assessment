@@ -1,5 +1,15 @@
-import { Box, Text, Button, HStack, Divider, Icon, Link, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Button,
+  HStack,
+  Divider,
+  Icon,
+  Link,
+  Flex,
+} from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 
 const LandingFooter = () => {
   return (
@@ -51,15 +61,15 @@ const LandingFooter = () => {
         color="white"
       >
         <Text>© 2025 Rev-up.</Text>
-        <HStack spacing="1.5rem">
-          <Link href="/legal" _hover={{ textDecoration: "underline" }}>
-            Legal
+
+      
+        {/* Social Media Icons */}
+        <HStack spacing="1rem">
+          <Link href="https://www.facebook.com/profile.php?id=61576711405754" isExternal>
+            <Icon as={FaFacebookF} boxSize={5} _hover={{ color: "blue.400" }} />
           </Link>
-          <Link href="/privacy-policy" _hover={{ textDecoration: "underline" }}>
-            Privacy Policy
-          </Link>
-          <Link href="/terms" _hover={{ textDecoration: "underline" }}>
-            Terms & Conditions
+          <Link href="https://www.instagram.com/werevup/" isExternal>
+            <Icon as={FaInstagram} boxSize={5} _hover={{ color: "pink.400" }} />
           </Link>
         </HStack>
       </Flex>
