@@ -9,7 +9,6 @@ import postRoutes from "./routes/Posts.js";
 import vehicleRoutes from "./routes/Vehicles.js";
 import documentRoutes from "./routes/Documents.js";
 
-
 const app = express();
 
 dotenv.config();
@@ -100,15 +99,11 @@ mongoose
     // Posting on the Forum
     app.use("/api/posts", postRoutes);
 
-
-
     // Adding Vehicle and Document
     app.use("/api/vehicles", vehicleRoutes);
     app.use("/api/documents", documentRoutes);
 
     app.use("/uploads", express.static("uploads"));
-
-    
 
     // Start the server only after DB connection
     app.listen(3000, () => {
