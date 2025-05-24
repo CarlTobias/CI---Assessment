@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import User from "./models/User.js";
 import postRoutes from "./routes/Posts.js";
@@ -14,9 +16,16 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "dist")));
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://rev-up-50vg.onrender.com",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -29,16 +38,6 @@ mongoose
   })
   .then(() => {
     console.log("✅ Successfully connected to MongoDB");
-
-    // Middleware
-    app.use(express.json());
-    app.use(
-      cors({
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-      })
-    );
 
     // Register
     app.post("/api/register", async (req, res) => {
