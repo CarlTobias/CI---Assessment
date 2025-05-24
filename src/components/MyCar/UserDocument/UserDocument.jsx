@@ -114,21 +114,26 @@ const UserDocument = ({ vehicle }) => {
         justify={"center"}
         align={"center"}
         gap={5}
-        p={5}
         border={"solid 2px black"}
         borderRadius={10}
+        p={1}
+        backgroundColor={"white"}
+        fontFamily={'Poppins'} 
       >
         <Flex
           w={"100%"}
           justify={"space-between"}
           align={"center"}
           backgroundColor={"gray.200"}
+          borderRadius={10}
+          borderBottomRadius={5}
+          p={3}
         >
-          <Box pl={3}>
+          <Box pl={3} fontSize={"xl"} fontWeight={700}>
             {vehicle.brand} {vehicle.model}
           </Box>
           <Menu>
-            <MenuButton as={Button} rightIcon={<BsThreeDotsVertical />} />
+            <MenuButton backgroundColor={"gray.200"} as={Button} rightIcon={<BsThreeDotsVertical />} />
             <MenuList>
               <MenuItem onClick={() => setIsEditOpen(true)}>
                 Edit Vehicle
@@ -141,35 +146,112 @@ const UserDocument = ({ vehicle }) => {
           </Menu>
         </Flex>
 
-        <Flex w={"100%"} justify={"space-between"}>
+        <Flex w={"100%"} justify={"space-between"} 
+        px={5}>
           <Flex flexDirection={"column"}>
-            <Box>Type</Box>
-            <Box>{vehicle.type}</Box>
+            <Box 
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            display={{ base: "none", lg: "table-cell" }}
+          >
+            Type
+          </Box>
+            <Box 
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            display={{ base: "none", lg: "table-cell" }}
+            >{vehicle.type}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
-            <Box>Brand</Box>
-            <Box>{vehicle.brand}</Box>
+            <Box
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            display={{ base: "none", md: "table-cell" }}
+            >
+              Brand
+            </Box>
+            <Box
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            display={{ base: "none", md: "table-cell" }}
+            >{vehicle.brand}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
-            <Box>Model</Box>
-            <Box>{vehicle.model}</Box>
+            <Box
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            display={{ base: "none", md: "table-cell" }}
+            >
+              Model</Box>
+            <Box
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            display={{ base: "none", md: "table-cell" }}
+            >{vehicle.model}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
-            <Box>Plate Number</Box>
-            <Box>{vehicle.plateNumber}</Box>
+            <Box 
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            >
+              Plate Number</Box>
+            <Box
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            >{vehicle.plateNumber}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
-            <Box>Year</Box>
-            <Box>{vehicle.year}</Box>
+            <Box 
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            display={{ base: "none", lg: "table-cell" }}
+            >Year</Box>
+            <Box
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            display={{ base: "none", lg: "table-cell" }}
+            >{vehicle.year}</Box>
           </Flex>
 
           <Flex flexDirection={"column"}>
-            <Box>Mileage</Box>
-            <Box>{vehicle.mileage}</Box>
+            <Box
+            w={"100%"}
+            color={"gray.500"}
+            fontWeight={500}
+            fontSize={"sm"}
+            display={{ base: "none", lg: "table-cell" }}
+            >Mileage</Box>
+            <Box
+            w={"100%"}
+            color={"black"}
+            fontWeight={700}
+            fontSize={"lg"}
+            display={{ base: "none", lg: "table-cell" }}
+            >{vehicle.mileage}</Box>
           </Flex>
         </Flex>
 
@@ -179,8 +261,17 @@ const UserDocument = ({ vehicle }) => {
           onDelete={handleDeleteDocument}
         />
 
-        <Flex>
-          <Button bg={"red"} onClick={() => setIsModalOpen(true)}>
+        <Flex align={"center"} justify={"end"} w={"100%"} >
+          <Button 
+          bg={"#2A2727"} 
+          color="white"
+          _hover={{
+            bg: "#90030C",
+            transform: "scale(1.03)",
+          }}
+          transition="all 0.1s ease-in-out"
+          m={5}
+          onClick={() => setIsModalOpen(true)}>
             Add Document
           </Button>
         </Flex>
