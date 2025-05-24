@@ -5,9 +5,11 @@ import ForumPost from "../ForumPost/ForumPost";
 const ForumPosts = () => {
   const [posts, setPosts] = useState([]);
 
+  const baseUrl = import.meta.env.VITE_API_URL || "";
+
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("http://localhost:3000/api/posts");
+      const res = await fetch(`${baseUrl}api/posts`);
       const data = await res.json();
       setPosts(data);
     };

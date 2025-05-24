@@ -10,10 +10,11 @@ const MyCar = () => {
   const [vehicles, setVehicles] = useState([]);
   const user = authStore((state) => state.user);
 
+  const baseUrl = import.meta.env.VITE_API_URL || "";
 
   const addVehicle = async (vehicleData) => {
     try {
-      const response = await fetch("http://localhost:3000/api/vehicles", {
+      const response = await fetch(`${baseUrl}/api/vehicles`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...vehicleData, userId: user._id }),
@@ -32,7 +33,7 @@ const MyCar = () => {
     const fetchVehicles = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/vehicles/${user._id}`
+          `${baseUrl}/api/vehicles/${user._id}`
         );
         const data = await response.json();
         setVehicles(data);

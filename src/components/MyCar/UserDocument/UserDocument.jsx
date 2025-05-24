@@ -15,6 +15,9 @@ import AddVehicle from "../AddVehicle/AddVehicle";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+const baseUrl = import.meta.env.VITE_API_URL || "";
+
+
 const UserDocument = ({ vehicle }) => {
   const [documents, setDocuments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,9 +26,7 @@ const UserDocument = ({ vehicle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchDocuments = async () => {
-    const res = await fetch(
-      `http://localhost:3000/api/documents/${vehicle._id}`
-    );
+    const res = await fetch(`${baseUrl}/api/documents/${vehicle._id}`);
     const data = await res.json();
     setDocuments(data);
   };
@@ -40,13 +41,10 @@ const UserDocument = ({ vehicle }) => {
 
   const handleSaveDocument = async (formData) => {
     try {
-      const res = await fetch(
-        `http://localhost:3000/api/documents/${vehicle._id}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch(`${baseUrl}/api/documents/${vehicle._id}`, {
+        method: "POST",
+        body: formData,
+      });
 
       if (!res.ok) {
         const errorText = await res.text();
@@ -65,7 +63,7 @@ const UserDocument = ({ vehicle }) => {
   const handleDeleteDocument = async (docId) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/documents/${vehicle._id}/${docId}`,
+        `${baseUrl}/api/documents/${vehicle._id}/${docId}`,
         {
           method: "DELETE",
         }
@@ -87,7 +85,7 @@ const UserDocument = ({ vehicle }) => {
       if (!confirmed) return;
 
       const res = await fetch(
-        `http://localhost:3000/api/vehicles/${vehicle._id}`,
+        `${baseUrl}/api/vehicles/${vehicle._id}`,
         {
           method: "DELETE",
         }
@@ -290,7 +288,7 @@ const UserDocument = ({ vehicle }) => {
               // EDIT MODE
               try {
                 const res = await fetch(
-                  `http://localhost:3000/api/documents/${vehicle._id}/${selectedDocument._id}`,
+                  `${baseUrl}/api/documents/${vehicle._id}/${selectedDocument._id}`,
                   {
                     method: "PUT",
                     body: formData,
@@ -320,7 +318,7 @@ const UserDocument = ({ vehicle }) => {
           onSave={async (updatedVehicleData) => {
             try {
               const res = await fetch(
-                `http://localhost:3000/api/vehicles/${vehicle._id}`,
+                `${baseUrl}/api/vehicles/${vehicle._id}`,
                 {
                   method: "PUT",
                   headers: {
