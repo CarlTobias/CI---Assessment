@@ -37,7 +37,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("✅ Successfully connected to MongoDB");
+    console.log("Successfully connected to MongoDB");
 
     // Register
     app.post("/api/register", async (req, res) => {
@@ -105,8 +105,11 @@ mongoose
     app.use("/uploads", express.static("uploads"));
 
     // Start the server only after DB connection
-    app.listen(3000, () => {
-      console.log("🚀 Server running on http://localhost:3000");
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(
+        `Server running on http://https://rev-up-50vg.onrender.com:${port}`
+      );
     });
   })
-  .catch((err) => console.error("❌ Error connecting to MongoDB:", err));
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
