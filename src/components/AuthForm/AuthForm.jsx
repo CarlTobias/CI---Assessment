@@ -49,6 +49,7 @@ const AuthForm = () => {
       });
       return;
     }
+
     if (!isLogin && password !== confirmPassword) {
       toast({
         title: "Password mismatch",
@@ -75,7 +76,12 @@ const AuthForm = () => {
         }),
       });
 
-      const data = await res.json();
+      let data = {};
+      const text = await res.text();
+      if (text) {
+        data = JSON.parse(text);
+      }
+
       if (!res.ok) {
         toast({
           title: "Authentication failed",
@@ -117,6 +123,7 @@ const AuthForm = () => {
       });
     }
   };
+  
 
   return (
     <>
