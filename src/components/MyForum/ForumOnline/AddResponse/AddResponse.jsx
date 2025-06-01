@@ -26,6 +26,8 @@ const AddResponse = ({ isOpen, onClose, post }) => {
   const [responses, setResponses] = useState(post.responses || []);
   const { user } = authStore();
 
+  const baseUrl = import.meta.env.VITE_API_URL || "";
+
   // When the post changes, update local responses state
   useEffect(() => {
     setResponses(post.responses || []);
@@ -34,10 +36,15 @@ const AddResponse = ({ isOpen, onClose, post }) => {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:3000/api/posts/${post._id}/respond`,
+        `${baseUrl}/api/posts/${post._id}/respond`,
         {
           userId: user._id,
           response: response,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 

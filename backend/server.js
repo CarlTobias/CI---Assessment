@@ -108,7 +108,7 @@ mongoose
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(
-        `Server running on http://https://rev-up-50vg.onrender.com:${port}`
+        `Server running on https://rev-up-50vg.onrender.com:${port}`
       );
     });
   })

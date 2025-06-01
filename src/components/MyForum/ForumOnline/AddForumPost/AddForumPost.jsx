@@ -10,7 +10,6 @@ import {
   ModalContent,
   FormControl,
   ModalOverlay,
-  VStack,
 } from "@chakra-ui/react";
 
 import authStore from "../../../../stores/authStore";
@@ -21,6 +20,8 @@ const AddForumPost = ({ isOpen, onClose }) => {
   const [postTitle, setPostTitle] = useState("");
   const [userPost, setUserPost] = useState("");
   const { user } = authStore();
+
+  const baseUrl = import.meta.env.VITE_API_URL || "";
 
   const handleSubmit = async () => {
     if (!user) {
@@ -35,15 +36,12 @@ const AddForumPost = ({ isOpen, onClose }) => {
         userId: user._id,
       };
 
-      const res = await axios.post(
-        "http://localhost:3000/api/posts",
-        postPayload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post(`${baseUrl}/api/posts`, postPayload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
 
       console.log("Uploaded post:", res.data);
       resetForm();
