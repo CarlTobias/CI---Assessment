@@ -26,7 +26,7 @@ const AddResponse = ({ isOpen, onClose, post }) => {
   const [responses, setResponses] = useState(post.responses || []);
   const { user } = authStore();
 
-  const baseUrl = import.meta.env.VITE_API_URL || "";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   // When the post changes, update local responses state
   useEffect(() => {

@@ -5,7 +5,7 @@ import ForumPost from "../ForumPost/ForumPost";
 const ForumPosts = () => {
   const [posts, setPosts] = useState([]);
 
-  const baseUrl = import.meta.env.VITE_API_URL || "";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchPosts = async () => {

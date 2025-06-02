@@ -62,7 +62,7 @@ const AuthForm = () => {
     }
 
     try {
-      const baseUrl = import.meta.env.VITE_API_URL || "";
+      const baseUrl = import.meta.env.VITE_API_URL;
       const url = isLogin ? "/api/login" : "/api/register";
 
       const res = await fetch(baseUrl + url, {

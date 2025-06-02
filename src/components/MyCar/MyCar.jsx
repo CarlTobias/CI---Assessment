@@ -10,7 +10,7 @@ const MyCar = () => {
   const [vehicles, setVehicles] = useState([]);
   const user = authStore((state) => state.user);
 
-  const baseUrl = import.meta.env.VITE_API_URL || "";
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const addVehicle = async (vehicleData) => {
     try {
