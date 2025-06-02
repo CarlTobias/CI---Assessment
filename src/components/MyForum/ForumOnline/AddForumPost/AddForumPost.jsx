@@ -21,7 +21,7 @@ const AddForumPost = ({ isOpen, onClose }) => {
   const [userPost, setUserPost] = useState("");
   const { user } = authStore();
 
-  const baseUrl = import.meta.env.VITE_API_URL;
+  const baseUrl = "https://rev-up-50vg.onrender.com";
 
   const handleSubmit = async () => {
     if (!user) {

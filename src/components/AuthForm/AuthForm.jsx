@@ -62,9 +62,8 @@ const AuthForm = () => {
     }
 
     try {
-      const baseUrl = import.meta.env.VITE_API_URL;
+      const baseUrl = "https://rev-up-50vg.onrender.com";
       const url = isLogin ? "/api/login" : "/api/register";
-
       const res = await fetch(baseUrl + url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

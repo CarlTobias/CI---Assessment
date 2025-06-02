@@ -11,8 +11,6 @@ import {
 } from "@chakra-ui/react";
 import LandingBar from "../../components/LandingBar/LandingBar";
 import Footer from "../../components/LandingFooter/LandingFooter";
-import { MdBuild } from "react-icons/md";
-import { motion } from "framer-motion";
 import InfiniteScrollText from "../../LandingAnimations/InfiniteScrollText";
 import AuthForm from "../../components/AuthForm/AuthForm";
 

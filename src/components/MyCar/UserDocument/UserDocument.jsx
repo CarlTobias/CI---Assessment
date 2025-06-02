@@ -15,7 +15,7 @@ import AddVehicle from "../AddVehicle/AddVehicle";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const baseUrl = import.meta.env.VITE_API_URL;
+const baseUrl = "https://rev-up-50vg.onrender.com";
 
 
 const UserDocument = ({ vehicle }) => {

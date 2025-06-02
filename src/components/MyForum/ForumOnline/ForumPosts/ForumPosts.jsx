@@ -5,7 +5,7 @@ import ForumPost from "../ForumPost/ForumPost";
 const ForumPosts = () => {
   const [posts, setPosts] = useState([]);
 
-  const baseUrl = import.meta.env.VITE_API_URL;
+  const baseUrl = "https://rev-up-50vg.onrender.com";
 
   useEffect(() => {
     const fetchPosts = async () => {
