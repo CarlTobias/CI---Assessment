@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 import { Box, Image } from "@chakra-ui/react";
 
-
+const images = [
+  { src: "/images/mycar.png", alt: "My Car" },
+  { src: "/images/myforum.png", alt: "Forum" },
+  { src: "/images/mygarages.png", alt: "Garages" },
+];
 
 export default function InfiniteScrollText() {
   const text = "JOIN REV-UP NOW";
