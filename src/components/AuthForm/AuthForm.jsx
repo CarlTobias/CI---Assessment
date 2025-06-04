@@ -14,6 +14,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import authStore from "../../stores/authStore";
 
 const AuthForm = () => {
+  const baseUrl = "https://rev-up-50vg.onrender.com/api";
+  const endpoint = isLogin ? "login" : "register";
+  
   const location = useLocation();
   const navigate = useNavigate();
   const login = authStore((state) => state.login);
@@ -62,12 +65,12 @@ const AuthForm = () => {
     }
 
     try {
-      const baseUrl = "https://rev-up-50vg.onrender.com";
-      const url = isLogin ? "/api/login" : "/api/register";
-      const res = await fetch(baseUrl + url, {
+      const res = await fetch(`${baseUrl}/${endpoint}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // needed for cookies/session
         body: JSON.stringify({
           email,
           password,
