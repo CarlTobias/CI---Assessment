@@ -6,10 +6,10 @@ import bcrypt from "bcrypt";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import User from "./models/User.js";
-import postRoutes from "./routes/Posts.js";
-import vehicleRoutes from "./routes/Vehicles.js";
-import documentRoutes from "./routes/Documents.js";
+import User from "./backend/models/User.js";
+import postRoutes from "./backend/routes/Posts.js";
+import vehicleRoutes from "./backend/routes/Vehicles.js";
+import documentRoutes from "./backend/routes/Documents.js";
 
 const app = express();
 
