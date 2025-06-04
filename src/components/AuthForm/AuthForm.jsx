@@ -15,7 +15,6 @@ import authStore from "../../stores/authStore";
 
 const AuthForm = () => {
   const baseUrl = "https://rev-up-50vg.onrender.com/api/";
-  const endpoint = isLogin ? "login" : "register";
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,6 +39,7 @@ const AuthForm = () => {
   });
 
   const handleAuth = async () => {
+    const endpoint = isLogin ? "login" : "register";
     const { username, email, password, confirmPassword } = inputs;
 
     if (!email || !password || (!isLogin && (!confirmPassword || !username))) {
@@ -65,12 +65,12 @@ const AuthForm = () => {
     }
 
     try {
-      const res = await fetch(`${baseUrl}/${endpoint}`, {
+      const res = await fetch(`${baseUrl}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // needed for cookies/session
+        credentials: "include",
         body: JSON.stringify({
           email,
           password,
@@ -125,7 +125,6 @@ const AuthForm = () => {
       });
     }
   };
-  
 
   return (
     <>
