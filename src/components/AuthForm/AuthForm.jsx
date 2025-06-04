@@ -14,9 +14,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import authStore from "../../stores/authStore";
 
 const AuthForm = () => {
-  const baseUrl = "https://rev-up-50vg.onrender.com/api";
+  const baseUrl = "https://rev-up-50vg.onrender.com/api/";
   const endpoint = isLogin ? "login" : "register";
-  
+
   const location = useLocation();
   const navigate = useNavigate();
   const login = authStore((state) => state.login);
